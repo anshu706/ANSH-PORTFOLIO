@@ -19,19 +19,19 @@ import {
 } from "lucide-react";
 
 const NAME = "Ansh Upadhayay";
-const ROLE = "Python • Automation • AI/ML • Data";
+const ROLE = "Cloud • Automation • CI/CD • DevOps";
 const LOCATION = "India";
 const RESUME_LINK =
-  "https://drive.google.com/file/d/1dvTZI8Ietjc-BSyIZ-n7osmSAbLWN87z/view?usp=sharing";
+  "https://drive.google.com/file/d/1x6xy_LvXOnD7dRazN0A37HmOqVwV4qgY/view?usp=sharing";
 const EMAIL = "anshupadhayay212@gmail.com";
 const GITHUB = "https://github.com/anshu706";
 const LINKEDIN = "https://www.linkedin.com/in/ansh-upadhayay-011b77310/";
 
 const skills = [
-  { label: "Python", icon: <Code2 className="h-4 w-4" /> },
-  { label: "Java", icon: <Code2 className="h-4 w-4" /> },
-  { label: "AI/ML", icon: <Bot className="h-4 w-4" /> },
-  { label: "Data Science", icon: <BarChart3 className="h-4 w-4" /> },
+  { label: "Python & Bash", icon: <Code2 className="h-4 w-4" /> },
+  { label: "Docker & K8s", icon: <Cpu className="h-4 w-4" /> },
+  { label: "AWS / Cloud", icon: <Database className="h-4 w-4" /> },
+  { label: "CI/CD Pipelines", icon: <Bot className="h-4 w-4" /> },
 ];
 
 const projectsSeed = [
@@ -267,12 +267,11 @@ export default function Portfolio() {
             <h1 className="mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl mb-2">
               Hi, I'm {NAME}.<br />
               <span className="bg-gradient-to-r from-emerald-600 to-cyan-600 bg-clip-text text-transparent dark:from-emerald-400 dark:to-cyan-400">
-                Architecting intelligent solutions.
+                Automating scalable infrastructure.
               </span>
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-zinc-600 dark:text-zinc-300">
-              {ROLE} • Based in {LOCATION}. I like to solve real world problems
-              using technology. I also like to build games.
+              {ROLE} • Based in {LOCATION}. I specialize in bridging the gap between development and operations, building robust CI/CD pipelines, and optimizing cloud architectures for peak performance.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <a
@@ -308,7 +307,7 @@ export default function Portfolio() {
                   <div className="text-xs text-zinc-500">Primary Stack</div>
                 </div>
                 <div className="rounded-xl bg-zinc-100 p-4 dark:bg-zinc-800">
-                  <div className="text-2xl font-bold">AI/ML</div>
+                  <div className="text-2xl font-bold">DevOps</div>
                   <div className="text-xs text-zinc-500">Focus Area</div>
                 </div>
               </div>
@@ -396,20 +395,15 @@ export default function Portfolio() {
           <CardBox>
             <h3 className="text-lg font-semibold">Who am I?</h3>
             <p className="mt-2 text-sm leading-6 text-zinc-600 dark:text-zinc-300">
-              I am Ansh Upadhayay, a student deeply passionate about AI and
-              Machine Learning. Armed with a strong command of Python, C, and
-              Object-Oriented Programming, I thrive on dissecting complex
-              problems and engineering meaningful solutions. My journey in tech
-              is driven not just by curiosity, but by a genuine desire to build
-              systems that matter.
+              I am Ansh Upadhayay, a passionate engineer focused on cloud architecture and infrastructure automation. Armed with a strong foundation in software development and systems engineering, I thrive on streamlining complex CI/CD pipelines, orchestrating scalable environments, and ensuring high-availability deployments. My journey in tech is driven by a relentless pursuit of efficiency and a genuine desire to build resilient systems that empower modern applications.
             </p>
           </CardBox>
           <CardBox>
             <h3 className="text-lg font-semibold">Highlights</h3>
             <ul className="mt-2 space-y-2 text-sm text-zinc-600 dark:text-zinc-300">
-              <li>• Strong Python</li>
-              <li>• Clean code, docs, and testing mindset</li>
-              <li>• Curious about agents and automation</li>
+              <li>• Infrastructure as Code (IaC)</li>
+              <li>• Containerization & Orchestration</li>
+              <li>• Continuous Integration & Delivery (CI/CD)</li>
             </ul>
           </CardBox>
         </div>
