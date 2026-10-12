@@ -76,7 +76,7 @@ const projects = [
       "Tailwind CSS",
     ],
     repo: "https://github.com/anshu706/Threat-Zone",
-    demo: "https://drive.google.com/file/d/1lo_HAmuBD-aL_l1Zgq3dcha6AVuhIbX6/view?usp=sharing",
+    demo: "https://threat-zone.vercel.app/",
     preview: "Industrial Hazard Modeling • GIS Visualization",
   },
   {
@@ -104,7 +104,7 @@ const projects = [
       "AWS",
     ],
     repo: "https://github.com/anshu706/Construction-Project",
-    demo: "https://drive.google.com/file/d/1ouUPrA-vxLA-ZxwYo0ckDbvL96AsUYta/view?usp=sharing",
+    demo: "https://construction-project-liard.vercel.app/",
     preview: "Construction Operations • Progress & Budget Analytics",
   },
 ];
