@@ -300,10 +300,60 @@ const ExternalLinkButton = ({ href, children }) => (
   </a>
 );
 
+/* Project overview card: shown when a project has no video / live preview,
+   or when its video file can't be loaded. */
+const ProjectOverview = ({ project }) => (
+  <div className="relative flex flex-1 flex-col items-center justify-center overflow-hidden p-6 text-center">
+    <div className="absolute -left-10 top-10 h-36 w-36 rounded-full bg-emerald-400/10 blur-3xl transition duration-500 group-hover:bg-emerald-400/20" />
+    <div className="absolute -right-10 bottom-0 h-36 w-36 rounded-full bg-cyan-400/10 blur-3xl" />
+
+    <div className="absolute inset-0 opacity-20">
+      <div className="h-full w-full bg-[radial-gradient(#71717a_1px,transparent_1px)] [background-size:22px_22px]" />
+    </div>
+
+    <div className="relative mb-4 flex h-16 w-16 items-center justify-center rounded-2xl border border-emerald-400/25 bg-emerald-400/10 text-emerald-300 transition duration-500 group-hover:scale-110 group-hover:-rotate-3">
+      <Code2 className="h-8 w-8" />
+    </div>
+
+    <p className="relative text-base font-semibold text-white">
+      {project.title}
+    </p>
+
+    <p className="relative mt-2 max-w-sm text-sm leading-6 text-zinc-400">
+      {project.preview || "Project overview"}
+    </p>
+
+    <div className="relative mt-4 flex flex-wrap justify-center gap-2">
+      {project.stack.slice(0, 4).map((tech) => (
+        <span
+          key={tech}
+          className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[11px] text-zinc-300"
+        >
+          {tech}
+        </span>
+      ))}
+    </div>
+
+    {project.repo && (
+      <a
+        href={project.repo}
+        target="_blank"
+        rel="noreferrer"
+        className="relative mt-5 inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-xs font-medium text-zinc-200 transition duration-300 hover:border-emerald-400/40 hover:bg-emerald-400/10 hover:text-emerald-300"
+      >
+        <Github className="h-3.5 w-3.5" />
+        Explore Repository
+        <ArrowUpRight className="h-3.5 w-3.5" />
+      </a>
+    )}
+  </div>
+);
+
 /* Muted, looping autoplay video. Clicking it opens the Google Drive video.
    It only plays while it is on screen, to save data and battery. */
-const VideoPreview = ({ src, href, title }) => {
+const VideoPreview = ({ src, href, title, fallback }) => {
   const ref = useRef(null);
+  const [failed, setFailed] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
@@ -330,6 +380,10 @@ const VideoPreview = ({ src, href, title }) => {
     return () => observer.disconnect();
   }, [src]);
 
+  // If the video file is missing or can't play, show the overview card
+  // (never the live website).
+  if (failed) return fallback;
+
   return (
     <a
       href={href}
@@ -346,6 +400,7 @@ const VideoPreview = ({ src, href, title }) => {
         loop
         playsInline
         preload="auto"
+        onError={() => setFailed(true)}
         className="absolute inset-0 h-full w-full object-contain"
       />
 
@@ -921,6 +976,7 @@ export default function Portfolio() {
                           src={project.video}
                           href={project.drive || project.demo}
                           title={project.title}
+                          fallback={<ProjectOverview project={project} />}
                         />
                       ) : project.demo ? (
                         <iframe
@@ -931,50 +987,7 @@ export default function Portfolio() {
                           sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
                         />
                       ) : (
-                        <div className="relative flex flex-1 flex-col items-center justify-center overflow-hidden p-6 text-center">
-                          <div className="absolute -left-10 top-10 h-36 w-36 rounded-full bg-emerald-400/10 blur-3xl transition duration-500 group-hover:bg-emerald-400/20" />
-                          <div className="absolute -right-10 bottom-0 h-36 w-36 rounded-full bg-cyan-400/10 blur-3xl" />
-
-                          <div className="absolute inset-0 opacity-20">
-                            <div className="h-full w-full bg-[radial-gradient(#71717a_1px,transparent_1px)] [background-size:22px_22px]" />
-                          </div>
-
-                          <div className="relative mb-4 flex h-16 w-16 items-center justify-center rounded-2xl border border-emerald-400/25 bg-emerald-400/10 text-emerald-300 transition duration-500 group-hover:scale-110 group-hover:-rotate-3">
-                            <Code2 className="h-8 w-8" />
-                          </div>
-
-                          <p className="relative text-base font-semibold text-white">
-                            {project.title}
-                          </p>
-
-                          <p className="relative mt-2 max-w-sm text-sm leading-6 text-zinc-400">
-                            {project.preview || "Project overview"}
-                          </p>
-
-                          <div className="relative mt-4 flex flex-wrap justify-center gap-2">
-                            {project.stack.slice(0, 4).map((tech) => (
-                              <span
-                                key={tech}
-                                className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[11px] text-zinc-300"
-                              >
-                                {tech}
-                              </span>
-                            ))}
-                          </div>
-
-                          {project.repo && (
-                            <a
-                              href={project.repo}
-                              target="_blank"
-                              rel="noreferrer"
-                              className="relative mt-5 inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-xs font-medium text-zinc-200 transition duration-300 hover:border-emerald-400/40 hover:bg-emerald-400/10 hover:text-emerald-300"
-                            >
-                              <Github className="h-3.5 w-3.5" />
-                              Explore Repository
-                              <ArrowUpRight className="h-3.5 w-3.5" />
-                            </a>
-                          )}
-                        </div>
+                        <ProjectOverview project={project} />
                       )}
                     </div>
                   </div>
