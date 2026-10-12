@@ -21,6 +21,11 @@ import {
   Pause,
   Play,
   Sparkles,
+  Home,
+  Search,
+  Mail,
+  Folder,
+  Settings,
 } from "lucide-react";
 
 const NAME = "Ansh Upadhayay";
@@ -253,12 +258,20 @@ const ExternalLinkButton = ({ href, children }) => (
 /*                         ANIMATED FLOATING DOCK                            */
 /* -------------------------------------------------------------------------- */
 
+/*
+  Dock icons: Home, Search, Mail (with red badge), Folder, Settings.
+  Each one still scrolls to a section of your page:
+    Home     -> #home          Search   -> #projects (has the search bar)
+    Mail     -> #about         (Let's Connect / email)
+    Folder   -> #certificates  Settings -> #skills
+  Set `badge` to a number to show the red bubble, or remove it to hide it.
+*/
 const dockItems = [
-  { id: "home", label: "Home", Icon: Globe },
-  { id: "projects", label: "Projects", Icon: Code2 },
-  { id: "skills", label: "Skills", Icon: Terminal },
-  { id: "certificates", label: "Certificates", Icon: Award },
-  { id: "about", label: "About", Icon: Sparkles },
+  { id: "home", label: "Home", Icon: Home },
+  { id: "projects", label: "Projects", Icon: Search },
+  { id: "about", label: "Contact", Icon: Mail, badge: 3 },
+  { id: "certificates", label: "Certificates", Icon: Folder },
+  { id: "skills", label: "Skills", Icon: Settings },
 ];
 
 const FloatingDock = ({ dark }) => (
@@ -270,31 +283,41 @@ const FloatingDock = ({ dark }) => (
   >
     <nav
       aria-label="Floating navigation"
-      className={`flex items-center gap-2 rounded-2xl border p-2 shadow-2xl backdrop-blur-2xl ${
+      className={`flex items-center gap-3 rounded-[28px] border p-3 shadow-2xl backdrop-blur-2xl ${
         dark
-          ? "border-white/15 bg-zinc-950/80 shadow-black/40"
+          ? "border-white/10 bg-zinc-950/85 shadow-black/50"
           : "border-black/10 bg-white/85 shadow-zinc-400/30"
       }`}
     >
-      {dockItems.map(({ id, label, Icon }) => (
+      {dockItems.map(({ id, label, Icon, badge }) => (
         <motion.a
           key={id}
           href={`#${id}`}
-          aria-label={label}
+          aria-label={badge ? `${label} (${badge} new)` : label}
           title={label}
           whileHover={{ y: -6, scale: 1.08 }}
           whileTap={{ scale: 0.94 }}
           transition={{ type: "spring", stiffness: 400, damping: 20 }}
-          className={`group relative flex h-11 w-11 items-center justify-center rounded-xl border transition-colors duration-200 ${
+          className={`group relative flex h-14 w-14 items-center justify-center rounded-2xl border transition-colors duration-200 ${
             dark
-              ? "border-white/10 bg-white/[0.06] text-zinc-300 hover:border-emerald-400/40 hover:bg-emerald-400/10 hover:text-emerald-300"
-              : "border-black/5 bg-zinc-100 text-zinc-700 hover:border-emerald-400/40 hover:bg-emerald-50 hover:text-emerald-700"
+              ? "border-white/15 bg-gradient-to-b from-zinc-700/70 via-zinc-800 to-zinc-900 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_6px_14px_rgba(0,0,0,0.5)] hover:border-white/30"
+              : "border-black/10 bg-gradient-to-b from-white via-zinc-100 to-zinc-200 text-zinc-900 shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_6px_14px_rgba(0,0,0,0.12)] hover:border-black/25"
           }`}
         >
-          <Icon className="h-5 w-5" />
+          <Icon className="h-7 w-7" strokeWidth={2} />
+
+          {badge ? (
+            <span
+              className={`absolute -right-1.5 -top-1.5 flex h-[22px] min-w-[22px] items-center justify-center rounded-full border-2 bg-red-500 px-1 text-[12px] font-bold leading-none text-white shadow-md ${
+                dark ? "border-zinc-950" : "border-white"
+              }`}
+            >
+              {badge}
+            </span>
+          ) : null}
 
           <span
-            className={`pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg border px-2.5 py-1.5 text-[11px] font-medium opacity-0 shadow-xl transition-all duration-200 group-hover:-translate-y-1 group-hover:opacity-100 ${
+            className={`pointer-events-none absolute -top-11 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg border px-2.5 py-1.5 text-[11px] font-medium opacity-0 shadow-xl transition-all duration-200 group-hover:-translate-y-1 group-hover:opacity-100 ${
               dark
                 ? "border-white/10 bg-zinc-900 text-zinc-100"
                 : "border-black/10 bg-white text-zinc-800"
