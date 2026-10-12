@@ -21,11 +21,6 @@ import {
   Pause,
   Play,
   Sparkles,
-  Home,
-  Search,
-  Mail,
-  Folder,
-  Settings,
 } from "lucide-react";
 
 const NAME = "Ansh Upadhayay";
@@ -259,19 +254,16 @@ const ExternalLinkButton = ({ href, children }) => (
 /* -------------------------------------------------------------------------- */
 
 /*
-  Dock icons: Home, Search, Mail (with red badge), Folder, Settings.
-  Each one still scrolls to a section of your page:
-    Home     -> #home          Search   -> #projects (has the search bar)
-    Mail     -> #about         (Let's Connect / email)
-    Folder   -> #certificates  Settings -> #skills
-  Set `badge` to a number to show the red bubble, or remove it to hide it.
+  Dock icons: Globe, Code, Terminal, Award, Sparkles.
+  Each one scrolls to its section. `badge` shows the red bubble on an item;
+  delete the `badge: 3` property to hide it.
 */
 const dockItems = [
-  { id: "home", label: "Home", Icon: Home },
-  { id: "projects", label: "Projects", Icon: Search },
-  { id: "about", label: "Contact", Icon: Mail, badge: 3 },
-  { id: "certificates", label: "Certificates", Icon: Folder },
-  { id: "skills", label: "Skills", Icon: Settings },
+  { id: "home", label: "Home", Icon: Globe },
+  { id: "projects", label: "Projects", Icon: Code2 },
+  { id: "skills", label: "Skills", Icon: Terminal, badge: 3 },
+  { id: "certificates", label: "Certificates", Icon: Award },
+  { id: "about", label: "About", Icon: Sparkles },
 ];
 
 const FloatingDock = ({ dark }) => (
