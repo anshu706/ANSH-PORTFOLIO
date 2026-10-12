@@ -1,19 +1,37 @@
 import React, { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import {
-  Github, Linkedin, Globe, Moon, Sun, ExternalLink, Download,
-  ChevronRight, Code2, Database, Bot, Cpu, Cloud, Terminal,
-  Workflow, Award, ArrowUpRight, Pause, Play, Sparkles
+  Github,
+  Linkedin,
+  Globe,
+  Moon,
+  Sun,
+  ExternalLink,
+  Download,
+  ChevronRight,
+  Code2,
+  Database,
+  Bot,
+  Cpu,
+  Cloud,
+  Terminal,
+  Workflow,
+  Award,
+  ArrowUpRight,
+  Pause,
+  Play,
+  Sparkles,
 } from "lucide-react";
 
 const NAME = "Ansh Upadhayay";
 const ROLE = "Cloud • Automation • CI/CD • DevOps";
 const LOCATION = "India";
-const RESUME_LINK = "https://drive.google.com/file/d/1JYFwts9nLx7Zv3RFBDQ6i1COSISgE-z9/view?usp=sharing";
+const RESUME_LINK =
+  "https://drive.google.com/file/d/1JYFwts9nLx7Zv3RFBDQ6i1COSISgE-z9/view?usp=sharing";
 const EMAIL = "anshupadhayay212@gmail.com";
 const GITHUB = "https://github.com/anshu706";
-const LINKEDIN = "https://www.linkedin.com/in/ansh-upadhayay-011b77310/";
-
+const LINKEDIN =
+  "https://www.linkedin.com/in/ansh-upadhayay-011b77310/";
 
 const projects = [
   {
@@ -33,8 +51,6 @@ const projects = [
     demo: "https://python-projects-seven-ruddy.vercel.app/",
     preview: "Python Projects • Live site",
   },
-
-  // PROJECT 2: THREAT-ZONE
   {
     title: "Threat-Zone",
     year: "2026",
@@ -63,8 +79,6 @@ const projects = [
     demo: "https://drive.google.com/file/d/1lo_HAmuBD-aL_l1Zgq3dcha6AVuhIbX6/view?usp=sharing",
     preview: "Industrial Hazard Modeling • GIS Visualization",
   },
-
-  // PROJECT 3: CONSTRUCTION PROJECT
   {
     title: "Construction Project Monitoring Dashboard",
     year: "2026",
@@ -101,8 +115,14 @@ const skillGroups = [
     subtitle: "Scripting and problem solving",
     icon: <Code2 className="h-5 w-5" />,
     skills: [
-      { name: "Python", detail: "Scripting, automation and application logic" },
-      { name: "Bash", detail: "Shell commands and task automation" },
+      {
+        name: "Python",
+        detail: "Scripting, automation and application logic",
+      },
+      {
+        name: "Bash",
+        detail: "Shell commands and task automation",
+      },
     ],
   },
   {
@@ -110,9 +130,18 @@ const skillGroups = [
     subtitle: "Build, package and ship software",
     icon: <Workflow className="h-5 w-5" />,
     skills: [
-      { name: "Git & GitHub", detail: "Version control and collaboration" },
-      { name: "CI/CD", detail: "Automating build and delivery workflows" },
-      { name: "Docker", detail: "Containerization fundamentals" },
+      {
+        name: "Git & GitHub",
+        detail: "Version control and collaboration",
+      },
+      {
+        name: "CI/CD",
+        detail: "Automating build and delivery workflows",
+      },
+      {
+        name: "Docker",
+        detail: "Containerization fundamentals",
+      },
     ],
   },
   {
@@ -120,9 +149,18 @@ const skillGroups = [
     subtitle: "Modern deployment environments",
     icon: <Cloud className="h-5 w-5" />,
     skills: [
-      { name: "AWS", detail: "Cloud concepts and services" },
-      { name: "Linux", detail: "Command line and system fundamentals" },
-      { name: "Kubernetes", detail: "Container orchestration learning focus" },
+      {
+        name: "AWS",
+        detail: "Cloud concepts and services",
+      },
+      {
+        name: "Linux",
+        detail: "Command line and system fundamentals",
+      },
+      {
+        name: "Kubernetes",
+        detail: "Container orchestration learning focus",
+      },
     ],
   },
   {
@@ -130,14 +168,18 @@ const skillGroups = [
     subtitle: "The day-to-day engineering toolkit",
     icon: <Terminal className="h-5 w-5" />,
     skills: [
-      { name: "SQL / Databases", detail: "Working with structured data" },
-      { name: "Troubleshooting", detail: "Breaking problems down and debugging" },
+      {
+        name: "SQL / Databases",
+        detail: "Working with structured data",
+      },
+      {
+        name: "Troubleshooting",
+        detail: "Breaking problems down and debugging",
+      },
     ],
   },
 ];
 
-// Replace these examples with your real certificate names, verification URLs,
-// and image URLs. Leave image as "" if you do not have a certificate image.
 const certificates = [
   {
     name: "Add your certificate",
@@ -145,7 +187,8 @@ const certificates = [
     date: "Year",
     verify: "",
     image: "",
-    description: "Add the credential title, issuer, and verification link here.",
+    description:
+      "Add the credential title, issuer, and verification link here.",
   },
   {
     name: "Cloud / DevOps Credential",
@@ -153,7 +196,8 @@ const certificates = [
     date: "Year",
     verify: "",
     image: "",
-    description: "A verified credential related to cloud, Linux, automation or DevOps.",
+    description:
+      "A verified credential related to cloud, Linux, automation or DevOps.",
   },
   {
     name: "Technical Learning Badge",
@@ -161,7 +205,8 @@ const certificates = [
     date: "Year",
     verify: "",
     image: "",
-    description: "Showcase a course completion badge or technical achievement.",
+    description:
+      "Showcase a course completion badge or technical achievement.",
   },
 ];
 
@@ -170,8 +215,14 @@ const Section = ({ id, title, eyebrow, children, right }) => (
     <div className="mx-auto max-w-6xl px-4">
       <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
         <div>
-          {eyebrow && <p className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-emerald-500">{eyebrow}</p>}
-          <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">{title}</h2>
+          {eyebrow && (
+            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-emerald-500">
+              {eyebrow}
+            </p>
+          )}
+          <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
+            {title}
+          </h2>
         </div>
         {right}
       </div>
@@ -181,20 +232,99 @@ const Section = ({ id, title, eyebrow, children, right }) => (
 );
 
 const CardBox = ({ children, className = "" }) => (
-  <div className={`rounded-2xl border border-black/5 bg-white p-5 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:shadow-lg dark:border-white/10 dark:bg-zinc-900 ${className}`}>
+  <div
+    className={`rounded-2xl border border-black/5 bg-white p-5 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:shadow-lg dark:border-white/10 dark:bg-zinc-900 ${className}`}
+  >
     {children}
   </div>
 );
 
 const Pill = ({ children }) => (
-  <span className="rounded-full border border-black/10 bg-black/[0.03] px-2.5 py-1 text-[11px] text-zinc-600 dark:border-white/10 dark:bg-white/[0.05] dark:text-zinc-300">{children}</span>
+  <span className="rounded-full border border-black/10 bg-black/[0.03] px-2.5 py-1 text-[11px] text-zinc-600 dark:border-white/10 dark:bg-white/[0.05] dark:text-zinc-300">
+    {children}
+  </span>
 );
 
 const ExternalLinkButton = ({ href, children }) => (
-  <a href={href} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-sm font-medium text-blue-600 transition hover:text-cyan-500 dark:text-blue-400">
-    {children}<ArrowUpRight className="h-4 w-4" />
+  <a
+    href={href}
+    target="_blank"
+    rel="noreferrer"
+    className="inline-flex items-center gap-1.5 text-sm font-medium text-blue-600 transition hover:text-cyan-500 dark:text-blue-400"
+  >
+    {children}
+    <ArrowUpRight className="h-4 w-4" />
   </a>
 );
+
+/* -------------------------------------------------------------------------- */
+/*                         ANIMATED FLOATING DOCK                            */
+/* -------------------------------------------------------------------------- */
+
+const dockItems = [
+  { id: "home", label: "Home", Icon: Globe },
+  { id: "projects", label: "Projects", Icon: Code2 },
+  { id: "skills", label: "Skills", Icon: Terminal },
+  { id: "certificates", label: "Certificates", Icon: Award },
+  { id: "about", label: "About", Icon: Sparkles },
+];
+
+const FloatingDock = ({ dark }) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 24, x: "-50%" }}
+      animate={{ opacity: 1, y: 0, x: "-50%" }}
+      transition={{ duration: 0.5, delay: 0.25 }}
+      className="fixed bottom-5 left-1/2 z-50"
+    >
+      <nav
+        aria-label="Floating navigation"
+        className={`flex items-center gap-2 rounded-2xl border p-2 shadow-2xl backdrop-blur-2xl ${
+          dark
+            ? "border-white/15 bg-zinc-950/80 shadow-black/40"
+            : "border-black/10 bg-white/85 shadow-zinc-400/30"
+        }`}
+      >
+        {dockItems.map(({ id, label, Icon }) => (
+          <motion.a
+            key={id}
+            href={`#${id}`}
+            aria-label={label}
+            title={label}
+            whileHover={{ y: -6, scale: 1.08 }}
+            whileTap={{ scale: 0.94 }}
+            transition={{
+              type: "spring",
+              stiffness: 400,
+              damping: 20,
+            }}
+            className={`group relative flex h-11 w-11 items-center justify-center rounded-xl border transition-colors duration-200 ${
+              dark
+                ? "border-white/10 bg-white/[0.06] text-zinc-300 hover:border-emerald-400/40 hover:bg-emerald-400/10 hover:text-emerald-300"
+                : "border-black/5 bg-zinc-100 text-zinc-700 hover:border-emerald-400/40 hover:bg-emerald-50 hover:text-emerald-700"
+            }`}
+          >
+            <Icon className="h-5 w-5" />
+
+            <span
+              className={`pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg border px-2.5 py-1.5 text-[11px] font-medium opacity-0 shadow-xl transition-all duration-200 group-hover:-translate-y-1 group-hover:opacity-100 ${
+                dark
+                  ? "border-white/10 bg-zinc-900 text-zinc-100"
+                  : "border-black/10 bg-white text-zinc-800"
+              }`}
+            >
+              {label}
+            </span>
+          </motion.a>
+        ))}
+      </nav>
+    </motion.div>
+  );
+};
+
+/* -------------------------------------------------------------------------- */
+/*                              MAIN PORTFOLIO                                */
+/* -------------------------------------------------------------------------- */
 
 export default function Portfolio() {
   const [dark, setDark] = useState(true);
@@ -202,375 +332,589 @@ export default function Portfolio() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [carouselPaused, setCarouselPaused] = useState(false);
 
-  const categories = ["All", ...new Set(projects.map((project) => project.category))];
-  const filteredProjects = useMemo(() => projects.filter((project) => {
-    const matchesCategory = activeCategory === "All" || project.category === activeCategory;
-    const searchable = `${project.title} ${project.description} ${project.stack.join(" ")} ${project.features.join(" ")}`.toLowerCase();
-    return matchesCategory && searchable.includes(query.toLowerCase());
-  }), [query, activeCategory]);
+  const categories = [
+    "All",
+    ...new Set(projects.map((project) => project.category)),
+  ];
+
+  const filteredProjects = useMemo(
+    () =>
+      projects.filter((project) => {
+        const matchesCategory =
+          activeCategory === "All" ||
+          project.category === activeCategory;
+
+        const searchable =
+          `${project.title} ${project.description} ${project.stack.join(" ")} ${project.features.join(" ")}`.toLowerCase();
+
+        return (
+          matchesCategory &&
+          searchable.includes(query.toLowerCase())
+        );
+      }),
+    [query, activeCategory]
+  );
 
   const themeClasses = dark
     ? "bg-black text-zinc-100 [color-scheme:dark]"
     : "bg-zinc-50 text-zinc-900 [color-scheme:light]";
 
   return (
-    <div className={`min-h-screen antialiased transition-colors duration-500 ${themeClasses}`}>
+    <div
+      className={`min-h-screen antialiased transition-colors duration-500 ${themeClasses}`}
+    >
       <style>{`
         @keyframes certificateMarquee {
           from { transform: translateX(0); }
           to { transform: translateX(-50%); }
         }
+
         .certificate-track {
           display: flex;
           width: max-content;
           animation: certificateMarquee 34s linear infinite;
         }
-        .certificate-track.paused { animation-play-state: paused; }
+
+        .certificate-track.paused {
+          animation-play-state: paused;
+        }
+
         .portfolio-grid {
           background-image: radial-gradient(rgba(45,212,191,.12) 1px, transparent 1px);
           background-size: 26px 26px;
           mask-image: linear-gradient(to bottom, black, transparent 85%);
         }
+
+        html {
+          scroll-behavior: smooth;
+        }
+
         @media (prefers-reduced-motion: reduce) {
-          .certificate-track { animation: none; }
-          *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+          .certificate-track {
+            animation: none;
+          }
+
+          *, *::before, *::after {
+            scroll-behavior: auto !important;
+            transition-duration: .01ms !important;
+          }
         }
       `}</style>
 
-      <header className={`sticky top-0 z-40 border-b backdrop-blur-xl ${dark ? "border-white/10 bg-black/75" : "border-black/5 bg-white/80"}`}>
+      {/* HEADER */}
+      <header
+        className={`sticky top-0 z-40 border-b backdrop-blur-xl ${
+          dark
+            ? "border-white/10 bg-black/75"
+            : "border-black/5 bg-white/80"
+        }`}
+      >
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
-          <a href="#home" className="shrink-0 font-semibold tracking-tight">{NAME}</a>
+          <a
+            href="#home"
+            className="shrink-0 font-semibold tracking-tight"
+          >
+            {NAME}
+          </a>
+
           <nav className="hidden items-center gap-5 text-sm md:flex">
-            <a href="#projects" className="transition hover:text-emerald-400">Projects</a>
-            <a href="#skills" className="transition hover:text-emerald-400">Skills</a>
-            <a href="#certificates" className="transition hover:text-emerald-400">Certificates</a>
-            <a href="#about" className="transition hover:text-emerald-400">About</a>
-            <a href={RESUME_LINK} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 rounded-full border border-white/15 px-3 py-1.5 text-xs transition hover:bg-white/10"><Download className="h-3.5 w-3.5" /> Resume</a>
+            <a href="#projects" className="transition hover:text-emerald-400">
+              Projects
+            </a>
+            <a href="#skills" className="transition hover:text-emerald-400">
+              Skills
+            </a>
+            <a
+              href="#certificates"
+              className="transition hover:text-emerald-400"
+            >
+              Certificates
+            </a>
+            <a href="#about" className="transition hover:text-emerald-400">
+              About
+            </a>
+            <a
+              href={RESUME_LINK}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1.5 rounded-full border border-white/15 px-3 py-1.5 text-xs transition hover:bg-white/10"
+            >
+              <Download className="h-3.5 w-3.5" />
+              Resume
+            </a>
           </nav>
+
           <div className="flex items-center gap-1 sm:gap-2">
-            <a href={GITHUB} target="_blank" rel="noreferrer" aria-label="GitHub" className="rounded-full p-2 transition hover:bg-white/10"><Github className="h-5 w-5" /></a>
-            <a href={LINKEDIN} target="_blank" rel="noreferrer" aria-label="LinkedIn" className="rounded-full p-2 transition hover:bg-white/10"><Linkedin className="h-5 w-5" /></a>
-            <button onClick={() => setDark(!dark)} aria-label="Toggle theme" className="rounded-full p-2 transition hover:bg-white/10">{dark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}</button>
+            <a
+              href={GITHUB}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="GitHub"
+              className="rounded-full p-2 transition hover:bg-white/10"
+            >
+              <Github className="h-5 w-5" />
+            </a>
+
+            <a
+              href={LINKEDIN}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="LinkedIn"
+              className="rounded-full p-2 transition hover:bg-white/10"
+            >
+              <Linkedin className="h-5 w-5" />
+            </a>
+
+            <button
+              onClick={() => setDark(!dark)}
+              aria-label="Toggle theme"
+              className="rounded-full p-2 transition hover:bg-white/10"
+            >
+              {dark ? (
+                <Sun className="h-5 w-5" />
+              ) : (
+                <Moon className="h-5 w-5" />
+              )}
+            </button>
           </div>
         </div>
       </header>
 
-      <main>
-        {/* HERO: original black + emerald/cyan visual identity retained */}
+      {/* Add bottom padding so the dock does not cover the page content. */}
+      <main className="pb-24">
+        {/* HERO */}
         <section id="home" className="relative isolate overflow-hidden">
           <div className="portfolio-grid pointer-events-none absolute inset-0 -z-10 opacity-80" />
           <div className="absolute -right-32 top-16 -z-10 h-72 w-72 rounded-full bg-cyan-500/10 blur-3xl" />
+
           <div className="mx-auto grid max-w-6xl gap-10 px-4 py-16 sm:py-24 lg:grid-cols-[1.3fr_.7fr] lg:items-center">
-            <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .65 }}>
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.65 }}
+            >
               <div className="inline-flex items-center gap-2 rounded-full border border-white/15 px-3 py-1.5 text-xs">
-                <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-400" /> Open to Internships & Projects
+                <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-400" />
+                Open to Internships & Projects
               </div>
+
               <h1 className="mt-5 text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-5xl md:text-6xl">
-                Hi, I’m {NAME}.<br />
-                <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent">Automating scalable infrastructure.</span>
+                Hi, I’m {NAME}.
+                <br />
+                <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent">
+                  Automating scalable infrastructure.
+                </span>
               </h1>
-              <p className={`mt-6 max-w-2xl text-base leading-7 sm:text-lg ${dark ? "text-zinc-300" : "text-zinc-600"}`}>
-                {ROLE} • Based in {LOCATION}. I’m building my foundation in cloud infrastructure, automation, and reliable software delivery—one practical project at a time.
+
+              <p
+                className={`mt-6 max-w-2xl text-base leading-7 sm:text-lg ${
+                  dark ? "text-zinc-300" : "text-zinc-600"
+                }`}
+              >
+                {ROLE} • Based in {LOCATION}. I’m building my foundation in
+                cloud infrastructure, automation, and reliable software
+                delivery—one practical project at a time.
               </p>
+
               <div className="mt-7 flex flex-wrap gap-3">
-                <a href="#projects" className={`inline-flex items-center gap-2 rounded-2xl px-4 py-2.5 font-medium transition hover:-translate-y-0.5 ${dark ? "bg-white text-black hover:bg-zinc-200" : "bg-zinc-900 text-white hover:bg-zinc-700"}`}><ChevronRight className="h-4 w-4" /> Explore Projects</a>
-                <a href={RESUME_LINK} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-2xl border border-white/20 px-4 py-2.5 transition hover:bg-white/10"><Download className="h-4 w-4" /> Resume</a>
+                <a
+                  href="#projects"
+                  className={`inline-flex items-center gap-2 rounded-2xl px-4 py-2.5 font-medium transition hover:-translate-y-0.5 ${
+                    dark
+                      ? "bg-white text-black hover:bg-zinc-200"
+                      : "bg-zinc-900 text-white hover:bg-zinc-700"
+                  }`}
+                >
+                  <ChevronRight className="h-4 w-4" />
+                  Explore Projects
+                </a>
+
+                <a
+                  href={RESUME_LINK}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 rounded-2xl border border-white/20 px-4 py-2.5 transition hover:bg-white/10"
+                >
+                  <Download className="h-4 w-4" />
+                  Resume
+                </a>
               </div>
-              <div className="mt-8 flex flex-wrap gap-2"><Pill>Python</Pill><Pill>Linux</Pill><Pill>Git</Pill><Pill>Cloud & DevOps</Pill></div>
+
+              <div className="mt-8 flex flex-wrap gap-2">
+                <Pill>Python</Pill>
+                <Pill>Linux</Pill>
+                <Pill>Git</Pill>
+                <Pill>Cloud & DevOps</Pill>
+              </div>
             </motion.div>
 
-            <motion.div initial={{ opacity: 0, scale: .96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: .65, delay: .12 }}>
-              <div className={`relative overflow-hidden rounded-3xl border p-5 shadow-2xl ${dark ? "border-white/10 bg-zinc-900/80 shadow-emerald-950/20" : "border-black/10 bg-white shadow-zinc-200"}`}>
-                <div className="mb-5 flex items-center justify-between"><div className="flex gap-1.5"><span className="h-2.5 w-2.5 rounded-full bg-rose-400"/><span className="h-2.5 w-2.5 rounded-full bg-amber-300"/><span className="h-2.5 w-2.5 rounded-full bg-emerald-400"/></div><span className="text-xs text-zinc-500">developer.profile</span></div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.65, delay: 0.12 }}
+            >
+              <div
+                className={`relative overflow-hidden rounded-3xl border p-5 shadow-2xl ${
+                  dark
+                    ? "border-white/10 bg-zinc-900/80 shadow-emerald-950/20"
+                    : "border-black/10 bg-white shadow-zinc-200"
+                }`}
+              >
+                <div className="mb-5 flex items-center justify-between">
+                  <div className="flex gap-1.5">
+                    <span className="h-2.5 w-2.5 rounded-full bg-rose-400" />
+                    <span className="h-2.5 w-2.5 rounded-full bg-amber-300" />
+                    <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" />
+                  </div>
+                  <span className="text-xs text-zinc-500">
+                    developer.profile
+                  </span>
+                </div>
+
                 <div className="space-y-3 font-mono text-sm">
                   <p className="text-zinc-500">{"// currently building"}</p>
-                  <p><span className="text-emerald-400">const</span> focus = [</p>
-                  <p className="pl-5 text-cyan-300">"cloud fundamentals",</p>
-                  <p className="pl-5 text-cyan-300">"automation & CI/CD",</p>
-                  <p className="pl-5 text-cyan-300">"reliable deployments"</p>
+                  <p>
+                    <span className="text-emerald-400">const</span> focus = [
+                  </p>
+                  <p className="pl-5 text-cyan-300">
+                    "cloud fundamentals",
+                  </p>
+                  <p className="pl-5 text-cyan-300">
+                    "automation & CI/CD",
+                  </p>
+                  <p className="pl-5 text-cyan-300">
+                    "reliable deployments"
+                  </p>
                   <p>];</p>
-                  <div className="my-5 h-px bg-white/10"/>
+
+                  <div className="my-5 h-px bg-white/10" />
+
                   <div className="grid grid-cols-2 gap-3">
-                    <div className="rounded-xl bg-white/[0.04] p-3"><Code2 className="mb-2 h-4 w-4 text-emerald-400"/><p className="font-semibold">Build</p><p className="mt-1 text-xs text-zinc-500">Practical projects</p></div>
-                    <div className="rounded-xl bg-white/[0.04] p-3"><Workflow className="mb-2 h-4 w-4 text-cyan-400"/><p className="font-semibold">Automate</p><p className="mt-1 text-xs text-zinc-500">Repeatable workflows</p></div>
+                    <div className="rounded-xl bg-white/[0.04] p-3">
+                      <Code2 className="mb-2 h-4 w-4 text-emerald-400" />
+                      <p className="font-semibold">Build</p>
+                      <p className="mt-1 text-xs text-zinc-500">
+                        Practical projects
+                      </p>
+                    </div>
+
+                    <div className="rounded-xl bg-white/[0.04] p-3">
+                      <Workflow className="mb-2 h-4 w-4 text-cyan-400" />
+                      <p className="font-semibold">Automate</p>
+                      <p className="mt-1 text-xs text-zinc-500">
+                        Repeatable workflows
+                      </p>
+                    </div>
                   </div>
                 </div>
-                <div className="pointer-events-none absolute -bottom-12 -right-12 h-32 w-32 rounded-full bg-emerald-400/10 blur-2xl"/>
+
+                <div className="pointer-events-none absolute -bottom-12 -right-12 h-32 w-32 rounded-full bg-emerald-400/10 blur-2xl" />
               </div>
             </motion.div>
           </div>
         </section>
 
-
-{/* PROJECTS */}
-<Section
-  id="projects"
-  title="Selected Projects"
-  eyebrow="Things I’ve built"
-  right={
-    <span className="text-sm text-zinc-500">
-      {filteredProjects.length} projects
-    </span>
-  }
->
-  {/* Search and filters */}
-  <div className="mb-6 flex flex-col gap-3 sm:flex-row">
-    <div
-      className={`flex flex-1 items-center gap-2 rounded-xl border px-3 ${
-        dark
-          ? "border-white/10 bg-zinc-900"
-          : "border-black/10 bg-white"
-      }`}
-    >
-      <Sparkles className="h-4 w-4 text-zinc-500" />
-
-      <input
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        placeholder="Search projects, tools, features..."
-        className="w-full bg-transparent py-3 text-sm outline-none placeholder:text-zinc-500"
-      />
-    </div>
-
-    <div className="flex flex-wrap gap-2">
-      {categories.map((category) => (
-        <button
-          key={category}
-          onClick={() => setActiveCategory(category)}
-          className={`rounded-xl border px-3 py-2 text-sm transition duration-300 hover:-translate-y-0.5 ${
-            activeCategory === category
-              ? "border-emerald-400/50 bg-emerald-400/10 text-emerald-500"
-              : dark
-                ? "border-white/10 text-zinc-300 hover:bg-white/5"
-                : "border-black/10 text-zinc-700 hover:bg-black/5"
-          }`}
+        {/* PROJECTS */}
+        <Section
+          id="projects"
+          title="Selected Projects"
+          eyebrow="Things I’ve built"
+          right={
+            <span className="text-sm text-zinc-500">
+              {filteredProjects.length} projects
+            </span>
+          }
         >
-          {category}
-        </button>
-      ))}
-    </div>
-  </div>
-
-  {/* Project cards */}
-  <div className="grid gap-5">
-    {filteredProjects.map((project, index) => (
-      <motion.article
-        key={project.title}
-        initial={{ opacity: 0, y: 22 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.12 }}
-        transition={{
-          duration: 0.45,
-          delay: Math.min(index * 0.04, 0.2),
-        }}
-        className={`group overflow-hidden rounded-2xl border transition duration-300 hover:-translate-y-1 hover:border-emerald-400/40 ${
-          dark
-            ? "border-white/10 bg-zinc-900/80"
-            : "border-black/10 bg-white"
-        }`}
-      >
-        <div className="grid lg:grid-cols-[0.95fr_1.05fr]">
-
-          {/* Project information */}
-          <div className="flex flex-col p-5 sm:p-7">
-            <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
-              <span className="text-xs text-zinc-500">
-                {project.year}
-                {project.level ? ` · ${project.level}` : ""}
-              </span>
-
-              <Pill>{project.category}</Pill>
-            </div>
-
-            <h3 className="text-xl font-semibold tracking-tight">
-              {project.title}
-            </h3>
-
-            <p
-              className={`mt-3 text-sm leading-6 ${
-                dark ? "text-zinc-300" : "text-zinc-600"
+          <div className="mb-6 flex flex-col gap-3 sm:flex-row">
+            <div
+              className={`flex flex-1 items-center gap-2 rounded-xl border px-3 ${
+                dark
+                  ? "border-white/10 bg-zinc-900"
+                  : "border-black/10 bg-white"
               }`}
             >
-              {project.description}
-            </p>
+              <Sparkles className="h-4 w-4 text-zinc-500" />
 
-            {project.features?.length > 0 && (
-              <div className="mt-5">
-                <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-zinc-500">
-                  Key Highlights
-                </p>
-
-                <ul className="space-y-2.5 text-sm">
-                  {project.features.map((feature) => (
-                    <li
-                      key={feature}
-                      className="flex items-start gap-2"
-                    >
-                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400" />
-
-                      <span
-                        className={
-                          dark ? "text-zinc-300" : "text-zinc-700"
-                        }
-                      >
-                        {feature}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {/* Technology stack */}
-            <div className="mt-5">
-              <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-zinc-500">
-                Built With
-              </p>
-
-              <div className="flex flex-wrap gap-2">
-                {project.stack.map((tech) => (
-                  <Pill key={tech}>{tech}</Pill>
-                ))}
-              </div>
+              <input
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Search projects, tools, features..."
+                className="w-full bg-transparent py-3 text-sm outline-none placeholder:text-zinc-500"
+              />
             </div>
 
-            {/* Links */}
-            <div className="mt-auto flex flex-wrap gap-4 pt-6">
-              {project.repo && (
-                <ExternalLinkButton href={project.repo}>
-                  <Github className="h-4 w-4" />
-                  Source Code
-                </ExternalLinkButton>
-              )}
-
-              {project.demo && (
-                <ExternalLinkButton href={project.demo}>
-                  <Globe className="h-4 w-4" />
-                  Open Live Demo
-                </ExternalLinkButton>
-              )}
+            <div className="flex flex-wrap gap-2">
+              {categories.map((category) => (
+                <button
+                  key={category}
+                  onClick={() => setActiveCategory(category)}
+                  className={`rounded-xl border px-3 py-2 text-sm transition duration-300 hover:-translate-y-0.5 ${
+                    activeCategory === category
+                      ? "border-emerald-400/50 bg-emerald-400/10 text-emerald-500"
+                      : dark
+                        ? "border-white/10 text-zinc-300 hover:bg-white/5"
+                        : "border-black/10 text-zinc-700 hover:bg-black/5"
+                  }`}
+                >
+                  {category}
+                </button>
+              ))}
             </div>
           </div>
 
-          {/* Preview panel */}
-          <div
-            className={`min-h-[300px] border-t p-3 lg:border-l lg:border-t-0 ${
-              dark
-                ? "border-white/10 bg-black/30"
-                : "border-black/10 bg-zinc-100"
-            }`}
-          >
-            <div className="flex h-full min-h-[300px] flex-col overflow-hidden rounded-xl border border-white/10 bg-[#101114]">
+          <div className="grid gap-5">
+            {filteredProjects.map((project, index) => (
+              <motion.article
+                key={project.title}
+                initial={{ opacity: 0, y: 22 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.12 }}
+                transition={{
+                  duration: 0.45,
+                  delay: Math.min(index * 0.04, 0.2),
+                }}
+                className={`group overflow-hidden rounded-2xl border transition duration-300 hover:-translate-y-1 hover:border-emerald-400/40 ${
+                  dark
+                    ? "border-white/10 bg-zinc-900/80"
+                    : "border-black/10 bg-white"
+                }`}
+              >
+                <div className="grid lg:grid-cols-[0.95fr_1.05fr]">
+                  <div className="flex flex-col p-5 sm:p-7">
+                    <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
+                      <span className="text-xs text-zinc-500">
+                        {project.year}
+                        {project.level ? ` · ${project.level}` : ""}
+                      </span>
+                      <Pill>{project.category}</Pill>
+                    </div>
 
-              {/* Browser chrome */}
-              <div className="flex items-center gap-2 border-b border-white/10 px-3 py-3">
-                <div className="flex gap-1.5">
-                  <span className="h-2.5 w-2.5 rounded-full bg-rose-400" />
-                  <span className="h-2.5 w-2.5 rounded-full bg-amber-300" />
-                  <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" />
-                </div>
+                    <h3 className="text-xl font-semibold tracking-tight">
+                      {project.title}
+                    </h3>
 
-                <span className="ml-2 truncate text-[11px] text-zinc-500">
-                  {project.demo
-                    ? "Live Preview"
-                    : `${project.title} · Project Overview`}
-                </span>
+                    <p
+                      className={`mt-3 text-sm leading-6 ${
+                        dark ? "text-zinc-300" : "text-zinc-600"
+                      }`}
+                    >
+                      {project.description}
+                    </p>
 
-                {project.demo && (
-                  <a
-                    href={project.demo}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label={`Open ${project.title} in a new tab`}
-                    className="ml-auto text-zinc-400 transition hover:text-emerald-300"
+                    {project.features?.length > 0 && (
+                      <div className="mt-5">
+                        <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-zinc-500">
+                          Key Highlights
+                        </p>
+
+                        <ul className="space-y-2.5 text-sm">
+                          {project.features.map((feature) => (
+                            <li
+                              key={feature}
+                              className="flex items-start gap-2"
+                            >
+                              <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400" />
+                              <span
+                                className={
+                                  dark ? "text-zinc-300" : "text-zinc-700"
+                                }
+                              >
+                                {feature}
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    <div className="mt-5">
+                      <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-zinc-500">
+                        Built With
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {project.stack.map((tech) => (
+                          <Pill key={tech}>{tech}</Pill>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="mt-auto flex flex-wrap gap-4 pt-6">
+                      {project.repo && (
+                        <ExternalLinkButton href={project.repo}>
+                          <Github className="h-4 w-4" />
+                          Source Code
+                        </ExternalLinkButton>
+                      )}
+
+                      {project.demo && (
+                        <ExternalLinkButton href={project.demo}>
+                          <Globe className="h-4 w-4" />
+                          Open Live Demo
+                        </ExternalLinkButton>
+                      )}
+                    </div>
+                  </div>
+
+                  <div
+                    className={`min-h-[300px] border-t p-3 lg:border-l lg:border-t-0 ${
+                      dark
+                        ? "border-white/10 bg-black/30"
+                        : "border-black/10 bg-zinc-100"
+                    }`}
                   >
-                    <ArrowUpRight className="h-4 w-4" />
-                  </a>
-                )}
-              </div>
+                    <div className="flex h-full min-h-[300px] flex-col overflow-hidden rounded-xl border border-white/10 bg-[#101114]">
+                      <div className="flex items-center gap-2 border-b border-white/10 px-3 py-3">
+                        <div className="flex gap-1.5">
+                          <span className="h-2.5 w-2.5 rounded-full bg-rose-400" />
+                          <span className="h-2.5 w-2.5 rounded-full bg-amber-300" />
+                          <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" />
+                        </div>
 
-              {project.demo ? (
-                <iframe
-                  title={`${project.title} live preview`}
-                  src={project.demo}
-                  loading="lazy"
-                  className="min-h-[300px] w-full flex-1 bg-white"
-                  sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                />
-              ) : (
-                <div className="relative flex flex-1 flex-col items-center justify-center overflow-hidden p-6 text-center">
-                  {/* Ambient graphics */}
-                  <div className="absolute -left-10 top-10 h-36 w-36 rounded-full bg-emerald-400/10 blur-3xl transition duration-500 group-hover:bg-emerald-400/20" />
+                        <span className="ml-2 truncate text-[11px] text-zinc-500">
+                          {project.demo
+                            ? "Live Preview"
+                            : `${project.title} · Project Overview`}
+                        </span>
 
-                  <div className="absolute -right-10 bottom-0 h-36 w-36 rounded-full bg-cyan-400/10 blur-3xl" />
+                        {project.demo && (
+                          <a
+                            href={project.demo}
+                            target="_blank"
+                            rel="noreferrer"
+                            aria-label={`Open ${project.title} in a new tab`}
+                            className="ml-auto text-zinc-400 transition hover:text-emerald-300"
+                          >
+                            <ArrowUpRight className="h-4 w-4" />
+                          </a>
+                        )}
+                      </div>
 
-                  <div className="absolute inset-0 opacity-20">
-                    <div className="h-full w-full bg-[radial-gradient(#71717a_1px,transparent_1px)] [background-size:22px_22px]" />
+                      {project.demo ? (
+                        <iframe
+                          title={`${project.title} live preview`}
+                          src={project.demo}
+                          loading="lazy"
+                          className="min-h-[300px] w-full flex-1 bg-white"
+                          sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                        />
+                      ) : (
+                        <div className="relative flex flex-1 flex-col items-center justify-center overflow-hidden p-6 text-center">
+                          <div className="absolute -left-10 top-10 h-36 w-36 rounded-full bg-emerald-400/10 blur-3xl transition duration-500 group-hover:bg-emerald-400/20" />
+                          <div className="absolute -right-10 bottom-0 h-36 w-36 rounded-full bg-cyan-400/10 blur-3xl" />
+
+                          <div className="absolute inset-0 opacity-20">
+                            <div className="h-full w-full bg-[radial-gradient(#71717a_1px,transparent_1px)] [background-size:22px_22px]" />
+                          </div>
+
+                          <div className="relative mb-4 flex h-16 w-16 items-center justify-center rounded-2xl border border-emerald-400/25 bg-emerald-400/10 text-emerald-300 transition duration-500 group-hover:scale-110 group-hover:-rotate-3">
+                            <Code2 className="h-8 w-8" />
+                          </div>
+
+                          <p className="relative text-base font-semibold text-white">
+                            {project.title}
+                          </p>
+
+                          <p className="relative mt-2 max-w-sm text-sm leading-6 text-zinc-400">
+                            {project.preview || "Project overview"}
+                          </p>
+
+                          <div className="relative mt-4 flex flex-wrap justify-center gap-2">
+                            {project.stack.slice(0, 4).map((tech) => (
+                              <span
+                                key={tech}
+                                className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[11px] text-zinc-300"
+                              >
+                                {tech}
+                              </span>
+                            ))}
+                          </div>
+
+                          {project.repo && (
+                            <a
+                              href={project.repo}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="relative mt-5 inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-xs font-medium text-zinc-200 transition duration-300 hover:border-emerald-400/40 hover:bg-emerald-400/10 hover:text-emerald-300"
+                            >
+                              <Github className="h-3.5 w-3.5" />
+                              Explore Repository
+                              <ArrowUpRight className="h-3.5 w-3.5" />
+                            </a>
+                          )}
+                        </div>
+                      )}
+                    </div>
                   </div>
-
-                  <div className="relative mb-4 flex h-16 w-16 items-center justify-center rounded-2xl border border-emerald-400/25 bg-emerald-400/10 text-emerald-300 transition duration-500 group-hover:scale-110 group-hover:-rotate-3">
-                    <Code2 className="h-8 w-8" />
-                  </div>
-
-                  <p className="relative text-base font-semibold text-white">
-                    {project.title}
-                  </p>
-
-                  <p className="relative mt-2 max-w-sm text-sm leading-6 text-zinc-400">
-                    {project.preview || "Project overview"}
-                  </p>
-
-                  <div className="relative mt-4 flex flex-wrap justify-center gap-2">
-                    {project.stack.slice(0, 4).map((tech) => (
-                      <span
-                        key={tech}
-                        className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[11px] text-zinc-300"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-
-                  {project.repo && (
-                    <a
-                      href={project.repo}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="relative mt-5 inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-xs font-medium text-zinc-200 transition duration-300 hover:border-emerald-400/40 hover:bg-emerald-400/10 hover:text-emerald-300"
-                    >
-                      <Github className="h-3.5 w-3.5" />
-                      Explore Repository
-                      <ArrowUpRight className="h-3.5 w-3.5" />
-                    </a>
-                  )}
                 </div>
-              )}
-            </div>
-          </div>
-        </div>
-      </motion.article>
-    ))}
+              </motion.article>
+            ))}
 
-    {filteredProjects.length === 0 && (
-      <CardBox>
-        <p className="text-sm text-zinc-500">
-          No projects match that search. Try another keyword or category.
-        </p>
-      </CardBox>
-    )}
-  </div>
-</Section>
+            {filteredProjects.length === 0 && (
+              <CardBox>
+                <p className="text-sm text-zinc-500">
+                  No projects match that search. Try another keyword or
+                  category.
+                </p>
+              </CardBox>
+            )}
+          </div>
+        </Section>
 
         {/* SKILLS */}
-        <Section id="skills" title="Skills & Toolkit" eyebrow="My engineering toolbox">
-          <p className={`mb-7 max-w-2xl text-sm leading-6 ${dark ? "text-zinc-400" : "text-zinc-600"}`}>A growing toolkit focused on programming fundamentals, Linux, cloud infrastructure, and software delivery. Update these cards as your hands-on experience grows.</p>
+        <Section
+          id="skills"
+          title="Skills & Toolkit"
+          eyebrow="My engineering toolbox"
+        >
+          <p
+            className={`mb-7 max-w-2xl text-sm leading-6 ${
+              dark ? "text-zinc-400" : "text-zinc-600"
+            }`}
+          >
+            A growing toolkit focused on programming fundamentals, Linux,
+            cloud infrastructure, and software delivery. Update these cards as
+            your hands-on experience grows.
+          </p>
+
           <div className="grid gap-4 md:grid-cols-2">
             {skillGroups.map((group, index) => (
-              <motion.div key={group.title} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .15 }} transition={{ duration: .4, delay: index * .06 }}>
+              <motion.div
+                key={group.title}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.15 }}
+                transition={{ duration: 0.4, delay: index * 0.06 }}
+              >
                 <CardBox className="h-full p-0">
-                  <div className="flex items-start gap-3 border-b border-white/10 p-5"><div className="rounded-xl border border-emerald-400/20 bg-emerald-400/10 p-2.5 text-emerald-400">{group.icon}</div><div><h3 className="font-semibold">{group.title}</h3><p className="mt-1 text-xs text-zinc-500">{group.subtitle}</p></div></div>
+                  <div className="flex items-start gap-3 border-b border-white/10 p-5">
+                    <div className="rounded-xl border border-emerald-400/20 bg-emerald-400/10 p-2.5 text-emerald-400">
+                      {group.icon}
+                    </div>
+                    <div>
+                      <h3 className="font-semibold">{group.title}</h3>
+                      <p className="mt-1 text-xs text-zinc-500">
+                        {group.subtitle}
+                      </p>
+                    </div>
+                  </div>
+
                   <div className="space-y-1 p-3">
-                    {group.skills.map((skill) => <div key={skill.name} className="rounded-xl p-3 transition hover:bg-white/[0.04]"><div className="flex items-center justify-between gap-3"><span className="text-sm font-medium">{skill.name}</span><span className="h-1.5 w-1.5 rounded-full bg-emerald-400"/></div><p className="mt-1 text-xs leading-5 text-zinc-500">{skill.detail}</p></div>)}
+                    {group.skills.map((skill) => (
+                      <div
+                        key={skill.name}
+                        className="rounded-xl p-3 transition hover:bg-white/[0.04]"
+                      >
+                        <div className="flex items-center justify-between gap-3">
+                          <span className="text-sm font-medium">
+                            {skill.name}
+                          </span>
+                          <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                        </div>
+                        <p className="mt-1 text-xs leading-5 text-zinc-500">
+                          {skill.detail}
+                        </p>
+                      </div>
+                    ))}
                   </div>
                 </CardBox>
               </motion.div>
@@ -579,166 +923,262 @@ export default function Portfolio() {
         </Section>
 
         {/* CERTIFICATES */}
-        <Section id="certificates" title="Certificates & Learning" eyebrow="Proof of progress" right={
-          <button onClick={() => setCarouselPaused(!carouselPaused)} className="inline-flex items-center gap-2 rounded-full border border-white/15 px-3 py-2 text-xs transition hover:bg-white/10">
-            {carouselPaused ? <Play className="h-3.5 w-3.5"/> : <Pause className="h-3.5 w-3.5"/>}{carouselPaused ? "Play carousel" : "Pause carousel"}
-          </button>
-        }>
-          <p className={`mb-6 max-w-2xl text-sm leading-6 ${dark ? "text-zinc-400" : "text-zinc-600"}`}>A moving showcase for course certificates, skill badges, and verified credentials. Replace the sample cards below with your actual achievements.</p>
+        <Section
+          id="certificates"
+          title="Certificates & Learning"
+          eyebrow="Proof of progress"
+          right={
+            <button
+              onClick={() => setCarouselPaused(!carouselPaused)}
+              className="inline-flex items-center gap-2 rounded-full border border-white/15 px-3 py-2 text-xs transition hover:bg-white/10"
+            >
+              {carouselPaused ? (
+                <Play className="h-3.5 w-3.5" />
+              ) : (
+                <Pause className="h-3.5 w-3.5" />
+              )}
+              {carouselPaused ? "Play carousel" : "Pause carousel"}
+            </button>
+          }
+        >
+          <p
+            className={`mb-6 max-w-2xl text-sm leading-6 ${
+              dark ? "text-zinc-400" : "text-zinc-600"
+            }`}
+          >
+            A moving showcase for course certificates, skill badges, and
+            verified credentials. Replace the sample cards below with your
+            actual achievements.
+          </p>
+
           <div className="relative overflow-hidden">
-            <div className={`pointer-events-none absolute inset-y-0 left-0 z-10 w-10 bg-gradient-to-r ${dark ? "from-black" : "from-zinc-50"} to-transparent`}/>
-            <div className={`pointer-events-none absolute inset-y-0 right-0 z-10 w-10 bg-gradient-to-l ${dark ? "from-black" : "from-zinc-50"} to-transparent`}/>
-            <div className={`certificate-track gap-4 py-3 ${carouselPaused ? "paused" : ""}`} onMouseEnter={() => setCarouselPaused(true)} onMouseLeave={() => setCarouselPaused(false)}>
-              {[...certificates, ...certificates].map((certificate, index) => (
-                <article key={`${certificate.name}-${index}`} className={`w-[280px] shrink-0 overflow-hidden rounded-2xl border ${dark ? "border-white/10 bg-zinc-900" : "border-black/10 bg-white"}`}>
-                  {certificate.image ? <img src={certificate.image} alt={`${certificate.name} certificate`} className="h-36 w-full object-cover"/> : <div className="relative flex h-36 items-center justify-center overflow-hidden bg-gradient-to-br from-emerald-500/15 via-cyan-500/10 to-transparent"><div className="absolute -right-5 -top-8 h-28 w-28 rounded-full border border-emerald-400/20"/><div className="absolute -bottom-12 -left-5 h-28 w-28 rounded-full border border-cyan-400/20"/><Award className="h-12 w-12 text-emerald-400"/></div>}
-                  <div className="p-4"><p className="text-xs text-emerald-500">{certificate.issuer} · {certificate.date}</p><h3 className="mt-2 font-semibold">{certificate.name}</h3><p className="mt-2 min-h-[40px] text-xs leading-5 text-zinc-500">{certificate.description}</p>{certificate.verify ? <a href={certificate.verify} target="_blank" rel="noreferrer" className="mt-4 inline-flex items-center gap-1.5 text-xs font-medium text-blue-500 hover:text-cyan-400">Verify credential <ExternalLink className="h-3.5 w-3.5"/></a> : <p className="mt-4 text-xs text-zinc-600">Add verification link</p>}</div>
-                </article>
-              ))}
+            <div
+              className={`pointer-events-none absolute inset-y-0 left-0 z-10 w-10 bg-gradient-to-r ${
+                dark ? "from-black" : "from-zinc-50"
+              } to-transparent`}
+            />
+            <div
+              className={`pointer-events-none absolute inset-y-0 right-0 z-10 w-10 bg-gradient-to-l ${
+                dark ? "from-black" : "from-zinc-50"
+              } to-transparent`}
+            />
+
+            <div
+              className={`certificate-track gap-4 py-3 ${
+                carouselPaused ? "paused" : ""
+              }`}
+              onMouseEnter={() => setCarouselPaused(true)}
+              onMouseLeave={() => setCarouselPaused(false)}
+            >
+              {[...certificates, ...certificates].map(
+                (certificate, index) => (
+                  <article
+                    key={`${certificate.name}-${index}`}
+                    className={`w-[280px] shrink-0 overflow-hidden rounded-2xl border ${
+                      dark
+                        ? "border-white/10 bg-zinc-900"
+                        : "border-black/10 bg-white"
+                    }`}
+                  >
+                    {certificate.image ? (
+                      <img
+                        src={certificate.image}
+                        alt={`${certificate.name} certificate`}
+                        className="h-36 w-full object-cover"
+                      />
+                    ) : (
+                      <div className="relative flex h-36 items-center justify-center overflow-hidden bg-gradient-to-br from-emerald-500/15 via-cyan-500/10 to-transparent">
+                        <div className="absolute -right-5 -top-8 h-28 w-28 rounded-full border border-emerald-400/20" />
+                        <div className="absolute -bottom-12 -left-5 h-28 w-28 rounded-full border border-cyan-400/20" />
+                        <Award className="h-12 w-12 text-emerald-400" />
+                      </div>
+                    )}
+
+                    <div className="p-4">
+                      <p className="text-xs text-emerald-500">
+                        {certificate.issuer} · {certificate.date}
+                      </p>
+                      <h3 className="mt-2 font-semibold">
+                        {certificate.name}
+                      </h3>
+                      <p className="mt-2 min-h-[40px] text-xs leading-5 text-zinc-500">
+                        {certificate.description}
+                      </p>
+
+                      {certificate.verify ? (
+                        <a
+                          href={certificate.verify}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="mt-4 inline-flex items-center gap-1.5 text-xs font-medium text-blue-500 hover:text-cyan-400"
+                        >
+                          Verify credential
+                          <ExternalLink className="h-3.5 w-3.5" />
+                        </a>
+                      ) : (
+                        <p className="mt-4 text-xs text-zinc-600">
+                          Add verification link
+                        </p>
+                      )}
+                    </div>
+                  </article>
+                )
+              )}
             </div>
           </div>
-          <p className="mt-3 text-xs text-zinc-500">Tip: hover over the cards to pause the motion. The carousel also respects reduced-motion preferences.</p>
+
+          <p className="mt-3 text-xs text-zinc-500">
+            Tip: hover over the cards to pause the motion. The carousel also
+            respects reduced-motion preferences.
+          </p>
         </Section>
 
-        
-{/* ABOUT */}
-<Section
-  id="about"
-  title="About Me"
-  eyebrow="A little about my journey"
->
-  <div className="grid gap-5 lg:grid-cols-[1.2fr_.8fr]">
+        {/* ABOUT */}
+        <Section
+          id="about"
+          title="About Me"
+          eyebrow="A little about my journey"
+        >
+          <div className="grid gap-5 lg:grid-cols-[1.2fr_.8fr]">
+            <CardBox className="relative overflow-hidden border-zinc-200 bg-white p-6 text-zinc-900 sm:p-8">
+              <div className="absolute -right-12 -top-12 h-36 w-36 rounded-full bg-cyan-400/10 blur-3xl" />
 
-    {/* Main About Card */}
-    <CardBox className="relative overflow-hidden border-zinc-200 bg-white p-6 text-zinc-900 sm:p-8">
-      <div className="absolute -right-12 -top-12 h-36 w-36 rounded-full bg-cyan-400/10 blur-3xl" />
+              <div className="relative flex items-center gap-3">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-400/20 text-emerald-600">
+                  <Code2 className="h-6 w-6" />
+                </div>
 
-      <div className="relative flex items-center gap-3">
-        <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-400/20 text-emerald-600">
-          <Code2 className="h-6 w-6" />
-        </div>
+                <div>
+                  <h3 className="text-lg font-semibold text-zinc-900">
+                    Who am I?
+                  </h3>
+                  <p className="text-xs text-zinc-600">
+                    IT Student · Developer · Continuous Learner
+                  </p>
+                </div>
+              </div>
 
-        <div>
-          <h3 className="text-lg font-semibold text-zinc-900">
-            Who am I?
-          </h3>
-          <p className="text-xs text-zinc-600">
-            IT Student · Developer · Continuous Learner
-          </p>
-        </div>
-      </div>
+              <p className="relative mt-5 text-sm leading-7 text-zinc-700 sm:text-base">
+                I’m Ansh Upadhayay, an IT student interested in building
+                practical software and learning how applications are deployed
+                and maintained. I enjoy exploring Python, Linux, Git, cloud
+                concepts, and automation, and I’m working toward stronger
+                skills in CI/CD and infrastructure. My goal is to turn what I
+                learn into useful projects, document the process, and keep
+                improving through hands-on practice.
+              </p>
 
-      <p className="relative mt-5 text-sm leading-7 text-zinc-700 sm:text-base">
-        I’m Ansh Upadhayay, an IT student interested in building practical
-        software and learning how applications are deployed and maintained.
-        I enjoy exploring Python, Linux, Git, cloud concepts, and automation,
-        and I’m working toward stronger skills in CI/CD and infrastructure.
-        My goal is to turn what I learn into useful projects, document the
-        process, and keep improving through hands-on practice.
-      </p>
+              <div className="mt-6 flex flex-wrap gap-2">
+                {[
+                  "Hands-on learning",
+                  "Problem solving",
+                  "Automation",
+                  "Cloud fundamentals",
+                ].map((item) => (
+                  <span
+                    key={item}
+                    className="rounded-full border border-zinc-200 bg-zinc-100 px-3 py-1.5 text-xs text-zinc-700 transition duration-300 hover:-translate-y-0.5 hover:border-emerald-400 hover:bg-emerald-50"
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </CardBox>
 
-      <div className="mt-6 flex flex-wrap gap-2">
-        {["Hands-on learning", "Problem solving", "Automation", "Cloud fundamentals"].map((item) => (
-          <span
-            key={item}
-            className="rounded-full border border-zinc-200 bg-zinc-100 px-3 py-1.5 text-xs text-zinc-700 transition duration-300 hover:-translate-y-0.5 hover:border-emerald-400 hover:bg-emerald-50"
-          >
-            {item}
-          </span>
-        ))}
-      </div>
-    </CardBox>
+            <div className="grid gap-4">
+              <CardBox className="border-zinc-200 bg-white p-6 text-zinc-900 transition duration-300 hover:-translate-y-1 hover:border-emerald-400/60">
+                <div className="flex items-center gap-3">
+                  <div className="rounded-xl bg-emerald-50 p-3 text-emerald-600">
+                    <Workflow className="h-5 w-5" />
+                  </div>
+                  <h3 className="font-semibold text-zinc-900">
+                    Current Focus
+                  </h3>
+                </div>
 
-    {/* Right Side Cards */}
-    <div className="grid gap-4">
+                <p className="mt-4 text-sm leading-6 text-zinc-700">
+                  Strengthening Linux, Git, scripting, containers, and CI/CD
+                  fundamentals through practical projects and consistent
+                  learning.
+                </p>
+              </CardBox>
 
-      {/* Current Focus */}
-      <CardBox className="border-zinc-200 bg-white p-6 text-zinc-900 transition duration-300 hover:-translate-y-1 hover:border-emerald-400/60">
-        <div className="flex items-center gap-3">
-          <div className="rounded-xl bg-emerald-50 p-3 text-emerald-600">
-            <Workflow className="h-5 w-5" />
+              <CardBox className="border-zinc-200 bg-white p-6 text-zinc-900 transition duration-300 hover:-translate-y-1 hover:border-cyan-400/60">
+                <div className="flex items-center gap-3">
+                  <div className="rounded-xl bg-cyan-50 p-3 text-cyan-600">
+                    <Sparkles className="h-5 w-5" />
+                  </div>
+                  <h3 className="font-semibold text-zinc-900">
+                    What Drives Me
+                  </h3>
+                </div>
+
+                <p className="mt-4 text-sm leading-6 text-zinc-700">
+                  Understanding how systems work, solving technical problems,
+                  and making repetitive tasks simpler through automation.
+                </p>
+              </CardBox>
+
+              <CardBox className="border-zinc-200 bg-white p-6 text-zinc-900 transition duration-300 hover:-translate-y-1 hover:border-emerald-400/60">
+                <h3 className="font-semibold text-zinc-900">
+                  Let’s Connect
+                </h3>
+
+                <p className="mt-3 text-sm leading-6 text-zinc-700">
+                  Open to internships, collaborations, and interesting project
+                  discussions.
+                </p>
+
+                <div className="mt-4 flex flex-wrap gap-x-4 gap-y-3">
+                  <a
+                    href={GITHUB}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1.5 text-sm font-medium text-blue-600 transition hover:text-cyan-600"
+                  >
+                    <Github className="h-4 w-4" />
+                    GitHub
+                    <ArrowUpRight className="h-3.5 w-3.5" />
+                  </a>
+
+                  <a
+                    href={LINKEDIN}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1.5 text-sm font-medium text-blue-600 transition hover:text-cyan-600"
+                  >
+                    <Linkedin className="h-4 w-4" />
+                    LinkedIn
+                    <ArrowUpRight className="h-3.5 w-3.5" />
+                  </a>
+
+                  <a
+                    href={`mailto:${EMAIL}`}
+                    className="inline-flex items-center gap-1.5 text-sm font-medium text-blue-600 transition hover:text-cyan-600"
+                  >
+                    Email
+                    <ArrowUpRight className="h-3.5 w-3.5" />
+                  </a>
+                </div>
+              </CardBox>
+            </div>
           </div>
-
-          <h3 className="font-semibold text-zinc-900">
-            Current Focus
-          </h3>
-        </div>
-
-        <p className="mt-4 text-sm leading-6 text-zinc-700">
-          Strengthening Linux, Git, scripting, containers, and CI/CD
-          fundamentals through practical projects and consistent learning.
-        </p>
-      </CardBox>
-
-      {/* What Drives Me */}
-      <CardBox className="border-zinc-200 bg-white p-6 text-zinc-900 transition duration-300 hover:-translate-y-1 hover:border-cyan-400/60">
-        <div className="flex items-center gap-3">
-          <div className="rounded-xl bg-cyan-50 p-3 text-cyan-600">
-            <Sparkles className="h-5 w-5" />
-          </div>
-
-          <h3 className="font-semibold text-zinc-900">
-            What Drives Me
-          </h3>
-        </div>
-
-        <p className="mt-4 text-sm leading-6 text-zinc-700">
-          Understanding how systems work, solving technical problems,
-          and making repetitive tasks simpler through automation.
-        </p>
-      </CardBox>
-
-      {/* Connect */}
-      <CardBox className="border-zinc-200 bg-white p-6 text-zinc-900 transition duration-300 hover:-translate-y-1 hover:border-emerald-400/60">
-        <h3 className="font-semibold text-zinc-900">
-          Let’s Connect
-        </h3>
-
-        <p className="mt-3 text-sm leading-6 text-zinc-700">
-          Open to internships, collaborations, and interesting project
-          discussions.
-        </p>
-
-        <div className="mt-4 flex flex-wrap gap-x-4 gap-y-3">
-          <a
-            href={GITHUB}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-blue-600 transition hover:text-cyan-600"
-          >
-            <Github className="h-4 w-4" />
-            GitHub
-            <ArrowUpRight className="h-3.5 w-3.5" />
-          </a>
-
-          <a
-            href={LINKEDIN}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-blue-600 transition hover:text-cyan-600"
-          >
-            <Linkedin className="h-4 w-4" />
-            LinkedIn
-            <ArrowUpRight className="h-3.5 w-3.5" />
-          </a>
-
-          <a
-            href={`mailto:${EMAIL}`}
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-blue-600 transition hover:text-cyan-600"
-          >
-            Email
-            <ArrowUpRight className="h-3.5 w-3.5" />
-          </a>
-        </div>
-      </CardBox>
-    </div>
-  </div>
-</Section>
+        </Section>
       </main>
 
+      {/* ANIMATED DOCK */}
+      <FloatingDock dark={dark} />
+
+      {/* FOOTER */}
       <footer className="border-t border-white/10 px-4 py-8 text-center text-xs text-zinc-500">
-        <p>Designed & built by <span className="text-zinc-300">{NAME}</span></p>
-        <p className="mt-2">© {new Date().getFullYear()} · Built with React, Tailwind CSS & Framer Motion</p>
+        <p>
+          Designed & built by{" "}
+          <span className="text-zinc-300">{NAME}</span>
+        </p>
+        <p className="mt-2">
+          © {new Date().getFullYear()} · Built with React, Tailwind CSS &
+          Framer Motion
+        </p>
       </footer>
     </div>
   );
