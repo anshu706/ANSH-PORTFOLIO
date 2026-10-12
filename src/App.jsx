@@ -35,26 +35,6 @@ const LINKEDIN = "https://www.linkedin.com/in/ansh-upadhayay-011b77310/";
 
 const projects = [
   {
-    title: "Python Projects",
-    year: "2025",
-    level: "Collection",
-    category: "Python",
-    description:
-      "A collection of Python mini-projects, with a browser-based project page available as a demo.",
-    features: [
-      "Multiple mini-projects",
-      "Python practice",
-      "Project showcase",
-    ],
-    stack: ["Python", "Tkinter", "GitHub Pages"],
-    repo: "https://github.com/anshu706/PYTHON-PROJECTS",
-    loom: "e8eb5fe02a4d41688b0d087adefbd6d8",
-    video: "/videos/python-projects-demo.mp4",
-    videoLink: "https://www.loom.com/share/e8eb5fe02a4d41688b0d087adefbd6d8",
-    demo: "https://python-projects-seven-ruddy.vercel.app/",
-    preview: "Python Projects • Live site",
-  },
-  {
     title: "Threat-Zone",
     year: "2026",
     level: "Advanced",
