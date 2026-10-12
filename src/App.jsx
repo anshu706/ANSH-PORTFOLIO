@@ -371,22 +371,140 @@ export default function Portfolio() {
           <p className="mt-3 text-xs text-zinc-500">Tip: hover over the cards to pause the motion. The carousel also respects reduced-motion preferences.</p>
         </Section>
 
-        {/* ABOUT */}
-        <Section id="about" title="About Me" eyebrow="A little about my journey">
-          <div className="grid gap-5 lg:grid-cols-[1.2fr_.8fr]">
-            <CardBox className="relative overflow-hidden p-6 sm:p-8">
-              <div className="absolute -right-12 -top-12 h-36 w-36 rounded-full bg-cyan-400/10 blur-3xl"/>
-              <div className="relative flex items-center gap-3"><div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-400/20 to-cyan-400/20 text-emerald-400"><Code2 className="h-6 w-6"/></div><div><h3 className="text-lg font-semibold">Who am I?</h3><p className="text-xs text-zinc-500">IT student · Developer · Continuous learner</p></div></div>
-              <p className={`relative mt-5 text-sm leading-7 ${dark ? "text-zinc-300" : "text-zinc-600"}`}>I’m Ansh Upadhayay, an IT student interested in building practical software and learning how applications are deployed and maintained. I enjoy exploring Python, Linux, Git, cloud concepts, and automation, and I’m working toward stronger skills in CI/CD and infrastructure. My goal is to turn what I learn into useful projects, document the process, and keep improving through hands-on practice.</p>
-              <div className="mt-6 flex flex-wrap gap-2"><Pill>Hands-on learning</Pill><Pill>Problem solving</Pill><Pill>Automation</Pill><Pill>Cloud fundamentals</Pill></div>
-            </CardBox>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
-              <CardBox><div className="flex items-center gap-3"><div className="rounded-xl bg-emerald-400/10 p-2.5 text-emerald-400"><Workflow className="h-5 w-5"/></div><h3 className="font-semibold">Current focus</h3></div><p className="mt-3 text-sm leading-6 text-zinc-500">Strengthening Linux, Git, scripting, containers, and CI/CD fundamentals through practice.</p></CardBox>
-              <CardBox><div className="flex items-center gap-3"><div className="rounded-xl bg-cyan-400/10 p-2.5 text-cyan-400"><Sparkles className="h-5 w-5"/></div><h3 className="font-semibold">What drives me</h3></div><p className="mt-3 text-sm leading-6 text-zinc-500">Understanding how systems work, solving problems, and making repeatable tasks simpler.</p></CardBox>
-              <CardBox><h3 className="font-semibold">Let’s connect</h3><p className="mt-2 text-sm text-zinc-500">Open to internships, collaborations, and project discussions.</p><div className="mt-4 flex flex-wrap gap-4"><ExternalLinkButton href={GITHUB}><Github className="h-4 w-4"/> GitHub</ExternalLinkButton><ExternalLinkButton href={LINKEDIN}><Linkedin className="h-4 w-4"/> LinkedIn</ExternalLinkButton><a href={`mailto:${EMAIL}`} className="inline-flex items-center gap-1.5 text-sm font-medium text-blue-600 dark:text-blue-400">Email <ArrowUpRight className="h-4 w-4"/></a></div></CardBox>
-            </div>
+        
+{/* ABOUT */}
+<Section
+  id="about"
+  title="About Me"
+  eyebrow="A little about my journey"
+>
+  <div className="grid gap-5 lg:grid-cols-[1.2fr_.8fr]">
+
+    {/* Main About Card */}
+    <CardBox className="relative overflow-hidden border-zinc-200 bg-white p-6 text-zinc-900 sm:p-8">
+      <div className="absolute -right-12 -top-12 h-36 w-36 rounded-full bg-cyan-400/10 blur-3xl" />
+
+      <div className="relative flex items-center gap-3">
+        <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-400/20 text-emerald-600">
+          <Code2 className="h-6 w-6" />
+        </div>
+
+        <div>
+          <h3 className="text-lg font-semibold text-zinc-900">
+            Who am I?
+          </h3>
+          <p className="text-xs text-zinc-600">
+            IT Student · Developer · Continuous Learner
+          </p>
+        </div>
+      </div>
+
+      <p className="relative mt-5 text-sm leading-7 text-zinc-700 sm:text-base">
+        I’m Ansh Upadhayay, an IT student interested in building practical
+        software and learning how applications are deployed and maintained.
+        I enjoy exploring Python, Linux, Git, cloud concepts, and automation,
+        and I’m working toward stronger skills in CI/CD and infrastructure.
+        My goal is to turn what I learn into useful projects, document the
+        process, and keep improving through hands-on practice.
+      </p>
+
+      <div className="mt-6 flex flex-wrap gap-2">
+        {["Hands-on learning", "Problem solving", "Automation", "Cloud fundamentals"].map((item) => (
+          <span
+            key={item}
+            className="rounded-full border border-zinc-200 bg-zinc-100 px-3 py-1.5 text-xs text-zinc-700 transition duration-300 hover:-translate-y-0.5 hover:border-emerald-400 hover:bg-emerald-50"
+          >
+            {item}
+          </span>
+        ))}
+      </div>
+    </CardBox>
+
+    {/* Right Side Cards */}
+    <div className="grid gap-4">
+
+      {/* Current Focus */}
+      <CardBox className="border-zinc-200 bg-white p-6 text-zinc-900 transition duration-300 hover:-translate-y-1 hover:border-emerald-400/60">
+        <div className="flex items-center gap-3">
+          <div className="rounded-xl bg-emerald-50 p-3 text-emerald-600">
+            <Workflow className="h-5 w-5" />
           </div>
-        </Section>
+
+          <h3 className="font-semibold text-zinc-900">
+            Current Focus
+          </h3>
+        </div>
+
+        <p className="mt-4 text-sm leading-6 text-zinc-700">
+          Strengthening Linux, Git, scripting, containers, and CI/CD
+          fundamentals through practical projects and consistent learning.
+        </p>
+      </CardBox>
+
+      {/* What Drives Me */}
+      <CardBox className="border-zinc-200 bg-white p-6 text-zinc-900 transition duration-300 hover:-translate-y-1 hover:border-cyan-400/60">
+        <div className="flex items-center gap-3">
+          <div className="rounded-xl bg-cyan-50 p-3 text-cyan-600">
+            <Sparkles className="h-5 w-5" />
+          </div>
+
+          <h3 className="font-semibold text-zinc-900">
+            What Drives Me
+          </h3>
+        </div>
+
+        <p className="mt-4 text-sm leading-6 text-zinc-700">
+          Understanding how systems work, solving technical problems,
+          and making repetitive tasks simpler through automation.
+        </p>
+      </CardBox>
+
+      {/* Connect */}
+      <CardBox className="border-zinc-200 bg-white p-6 text-zinc-900 transition duration-300 hover:-translate-y-1 hover:border-emerald-400/60">
+        <h3 className="font-semibold text-zinc-900">
+          Let’s Connect
+        </h3>
+
+        <p className="mt-3 text-sm leading-6 text-zinc-700">
+          Open to internships, collaborations, and interesting project
+          discussions.
+        </p>
+
+        <div className="mt-4 flex flex-wrap gap-x-4 gap-y-3">
+          <a
+            href={GITHUB}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-blue-600 transition hover:text-cyan-600"
+          >
+            <Github className="h-4 w-4" />
+            GitHub
+            <ArrowUpRight className="h-3.5 w-3.5" />
+          </a>
+
+          <a
+            href={LINKEDIN}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-blue-600 transition hover:text-cyan-600"
+          >
+            <Linkedin className="h-4 w-4" />
+            LinkedIn
+            <ArrowUpRight className="h-3.5 w-3.5" />
+          </a>
+
+          <a
+            href={`mailto:${EMAIL}`}
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-blue-600 transition hover:text-cyan-600"
+          >
+            Email
+            <ArrowUpRight className="h-3.5 w-3.5" />
+          </a>
+        </div>
+      </CardBox>
+    </div>
+  </div>
+</Section>
       </main>
 
       <footer className="border-t border-white/10 px-4 py-8 text-center text-xs text-zinc-500">
