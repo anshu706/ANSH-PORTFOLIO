@@ -17,7 +17,7 @@ const LINKEDIN = "https://www.linkedin.com/in/ansh-upadhayay-011b77310/";
 
 const projects = [
   {
-    title: "Python Projects Collection",
+    title: "Python Projects",
     year: "2025",
     level: "Collection",
     category: "Python",
@@ -29,8 +29,8 @@ const projects = [
       "Project showcase",
     ],
     stack: ["Python", "Tkinter", "GitHub Pages"],
-    repo: "https://github.com/anshu706/Py1Projects",
-    demo: "https://anshu706.github.io/Py1Projects/",
+    repo: "https://github.com/anshu706/PYTHON-PROJECTS",
+    demo: "https://python-projects-seven-ruddy.vercel.app/",
     preview: "Python Projects • Live site",
   },
 
@@ -60,7 +60,7 @@ const projects = [
       "Tailwind CSS",
     ],
     repo: "https://github.com/anshu706/Threat-Zone",
-    demo: "",
+    demo: "https://drive.google.com/file/d/1lo_HAmuBD-aL_l1Zgq3dcha6AVuhIbX6/view?usp=sharing",
     preview: "Industrial Hazard Modeling • GIS Visualization",
   },
 
@@ -89,8 +89,8 @@ const projects = [
       "Kubernetes",
       "AWS",
     ],
-    repo: "",
-    demo: "",
+    repo: "https://github.com/anshu706/Construction-Project",
+    demo: "https://drive.google.com/file/d/1ouUPrA-vxLA-ZxwYo0ckDbvL96AsUYta/view?usp=sharing",
     preview: "Construction Operations • Progress & Budget Analytics",
   },
 ];
