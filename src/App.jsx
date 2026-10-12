@@ -1172,7 +1172,7 @@ export default function Portfolio() {
       <FloatingDock dark={dark} />
 
       {/* FOOTER */}
-      <footer className="border-t border-white/10 px-4 py-8 text-center text-xs text-zinc-500">
+      <footer className="border-t border-white/10 px-4 py-8 text-right text-xs text-zinc-500">
         <p>
           Designed & built by{" "}
           <span className="text-zinc-300">{NAME}</span>
