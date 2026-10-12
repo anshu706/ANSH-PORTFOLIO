@@ -26,12 +26,12 @@ import {
 const NAME = "Ansh Upadhayay";
 const ROLE = "Cloud • Automation • CI/CD • DevOps";
 const LOCATION = "India";
+
 const RESUME_LINK =
   "https://drive.google.com/file/d/1JYFwts9nLx7Zv3RFBDQ6i1COSISgE-z9/view?usp=sharing";
 const EMAIL = "anshupadhayay212@gmail.com";
 const GITHUB = "https://github.com/anshu706";
-const LINKEDIN =
-  "https://www.linkedin.com/in/ansh-upadhayay-011b77310/";
+const LINKEDIN = "https://www.linkedin.com/in/ansh-upadhayay-011b77310/";
 
 const projects = [
   {
@@ -113,7 +113,7 @@ const skillGroups = [
   {
     title: "Programming",
     subtitle: "Scripting and problem solving",
-    icon: <Code2 className="h-5 w-5" />,
+    icon: Code2,
     skills: [
       {
         name: "Python",
@@ -128,7 +128,7 @@ const skillGroups = [
   {
     title: "DevOps & Delivery",
     subtitle: "Build, package and ship software",
-    icon: <Workflow className="h-5 w-5" />,
+    icon: Workflow,
     skills: [
       {
         name: "Git & GitHub",
@@ -147,26 +147,18 @@ const skillGroups = [
   {
     title: "Cloud & Infrastructure",
     subtitle: "Modern deployment environments",
-    icon: <Cloud className="h-5 w-5" />,
+    icon: Cloud,
     skills: [
       {
         name: "AWS",
         detail: "Cloud concepts and services",
-      },
-      {
-        name: "Linux",
-        detail: "Command line and system fundamentals",
-      },
-      {
-        name: "Kubernetes",
-        detail: "Container orchestration learning focus",
       },
     ],
   },
   {
     title: "Tools & Systems",
     subtitle: "The day-to-day engineering toolkit",
-    icon: <Terminal className="h-5 w-5" />,
+    icon: Terminal,
     skills: [
       {
         name: "SQL / Databases",
@@ -269,58 +261,52 @@ const dockItems = [
   { id: "about", label: "About", Icon: Sparkles },
 ];
 
-const FloatingDock = ({ dark }) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 24, x: "-50%" }}
-      animate={{ opacity: 1, y: 0, x: "-50%" }}
-      transition={{ duration: 0.5, delay: 0.25 }}
-      className="fixed bottom-5 left-1/2 z-50"
+const FloatingDock = ({ dark }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 24, x: "-50%" }}
+    animate={{ opacity: 1, y: 0, x: "-50%" }}
+    transition={{ duration: 0.5, delay: 0.25 }}
+    className="fixed bottom-5 left-1/2 z-50"
+  >
+    <nav
+      aria-label="Floating navigation"
+      className={`flex items-center gap-2 rounded-2xl border p-2 shadow-2xl backdrop-blur-2xl ${
+        dark
+          ? "border-white/15 bg-zinc-950/80 shadow-black/40"
+          : "border-black/10 bg-white/85 shadow-zinc-400/30"
+      }`}
     >
-      <nav
-        aria-label="Floating navigation"
-        className={`flex items-center gap-2 rounded-2xl border p-2 shadow-2xl backdrop-blur-2xl ${
-          dark
-            ? "border-white/15 bg-zinc-950/80 shadow-black/40"
-            : "border-black/10 bg-white/85 shadow-zinc-400/30"
-        }`}
-      >
-        {dockItems.map(({ id, label, Icon }) => (
-          <motion.a
-            key={id}
-            href={`#${id}`}
-            aria-label={label}
-            title={label}
-            whileHover={{ y: -6, scale: 1.08 }}
-            whileTap={{ scale: 0.94 }}
-            transition={{
-              type: "spring",
-              stiffness: 400,
-              damping: 20,
-            }}
-            className={`group relative flex h-11 w-11 items-center justify-center rounded-xl border transition-colors duration-200 ${
+      {dockItems.map(({ id, label, Icon }) => (
+        <motion.a
+          key={id}
+          href={`#${id}`}
+          aria-label={label}
+          title={label}
+          whileHover={{ y: -6, scale: 1.08 }}
+          whileTap={{ scale: 0.94 }}
+          transition={{ type: "spring", stiffness: 400, damping: 20 }}
+          className={`group relative flex h-11 w-11 items-center justify-center rounded-xl border transition-colors duration-200 ${
+            dark
+              ? "border-white/10 bg-white/[0.06] text-zinc-300 hover:border-emerald-400/40 hover:bg-emerald-400/10 hover:text-emerald-300"
+              : "border-black/5 bg-zinc-100 text-zinc-700 hover:border-emerald-400/40 hover:bg-emerald-50 hover:text-emerald-700"
+          }`}
+        >
+          <Icon className="h-5 w-5" />
+
+          <span
+            className={`pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg border px-2.5 py-1.5 text-[11px] font-medium opacity-0 shadow-xl transition-all duration-200 group-hover:-translate-y-1 group-hover:opacity-100 ${
               dark
-                ? "border-white/10 bg-white/[0.06] text-zinc-300 hover:border-emerald-400/40 hover:bg-emerald-400/10 hover:text-emerald-300"
-                : "border-black/5 bg-zinc-100 text-zinc-700 hover:border-emerald-400/40 hover:bg-emerald-50 hover:text-emerald-700"
+                ? "border-white/10 bg-zinc-900 text-zinc-100"
+                : "border-black/10 bg-white text-zinc-800"
             }`}
           >
-            <Icon className="h-5 w-5" />
-
-            <span
-              className={`pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg border px-2.5 py-1.5 text-[11px] font-medium opacity-0 shadow-xl transition-all duration-200 group-hover:-translate-y-1 group-hover:opacity-100 ${
-                dark
-                  ? "border-white/10 bg-zinc-900 text-zinc-100"
-                  : "border-black/10 bg-white text-zinc-800"
-              }`}
-            >
-              {label}
-            </span>
-          </motion.a>
-        ))}
-      </nav>
-    </motion.div>
-  );
-};
+            {label}
+          </span>
+        </motion.a>
+      ))}
+    </nav>
+  </motion.div>
+);
 
 /* -------------------------------------------------------------------------- */
 /*                              MAIN PORTFOLIO                                */
@@ -480,7 +466,7 @@ export default function Portfolio() {
         </div>
       </header>
 
-      {/* Add bottom padding so the dock does not cover the page content. */}
+      {/* MAIN CONTENT */}
       <main className="pb-24">
         {/* HERO */}
         <section id="home" className="relative isolate overflow-hidden">
@@ -860,65 +846,79 @@ export default function Portfolio() {
           </div>
         </Section>
 
-        {/* SKILLS */}
+        {/* SKILLS — UPDATED BLACK TEXT ON WHITE CARDS */}
         <Section
           id="skills"
           title="Skills & Toolkit"
           eyebrow="My engineering toolbox"
         >
           <p
-            className={`mb-7 max-w-2xl text-sm leading-6 ${
-              dark ? "text-zinc-400" : "text-zinc-600"
+            className={`mb-7 max-w-4xl text-sm leading-7 ${
+              dark ? "text-zinc-300" : "text-zinc-600"
             }`}
           >
-            A growing toolkit focused on programming fundamentals, Linux,
-            cloud infrastructure, and software delivery. Update these cards as
-            your hands-on experience grows.
+            A growing toolkit focused on programming fundamentals, Linux, cloud
+            infrastructure, and software delivery. Update these cards as your
+            hands-on experience grows.
           </p>
 
-          <div className="grid gap-4 md:grid-cols-2">
-            {skillGroups.map((group, index) => (
-              <motion.div
-                key={group.title}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.15 }}
-                transition={{ duration: 0.4, delay: index * 0.06 }}
-              >
-                <CardBox className="h-full p-0">
-                  <div className="flex items-start gap-3 border-b border-white/10 p-5">
-                    <div className="rounded-xl border border-emerald-400/20 bg-emerald-400/10 p-2.5 text-emerald-400">
-                      {group.icon}
-                    </div>
-                    <div>
-                      <h3 className="font-semibold">{group.title}</h3>
-                      <p className="mt-1 text-xs text-zinc-500">
-                        {group.subtitle}
-                      </p>
-                    </div>
-                  </div>
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+            {skillGroups.map((group, index) => {
+              const Icon = group.icon;
 
-                  <div className="space-y-1 p-3">
-                    {group.skills.map((skill) => (
-                      <div
-                        key={skill.name}
-                        className="rounded-xl p-3 transition hover:bg-white/[0.04]"
-                      >
-                        <div className="flex items-center justify-between gap-3">
-                          <span className="text-sm font-medium">
-                            {skill.name}
-                          </span>
-                          <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                        </div>
-                        <p className="mt-1 text-xs leading-5 text-zinc-500">
-                          {skill.detail}
+              return (
+                <motion.div
+                  key={group.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.15 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  whileHover={{ y: -4 }}
+                  className="h-full"
+                >
+                  <div className="h-full rounded-2xl border border-zinc-200 bg-white p-7 text-black shadow-lg transition-shadow duration-300 hover:shadow-xl hover:shadow-emerald-400/10 sm:p-9">
+                    {/* Category Heading */}
+                    <div className="mb-8 flex items-center gap-4">
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-emerald-200 bg-emerald-50 text-emerald-500">
+                        <Icon size={25} strokeWidth={2} />
+                      </div>
+
+                      <div>
+                        <h3 className="text-lg font-bold text-black sm:text-xl">
+                          {group.title}
+                        </h3>
+
+                        <p className="mt-1 text-sm leading-6 text-zinc-700">
+                          {group.subtitle}
                         </p>
                       </div>
-                    ))}
+                    </div>
+
+                    {/* Skill List */}
+                    <div className="space-y-6">
+                      {group.skills.map((skill) => (
+                        <div
+                          key={skill.name}
+                          className="flex items-start justify-between gap-4 rounded-xl p-1 transition-colors duration-200"
+                        >
+                          <div>
+                            <h4 className="text-sm font-bold text-black sm:text-base">
+                              {skill.name}
+                            </h4>
+
+                            <p className="mt-1 text-sm leading-6 text-zinc-700">
+                              {skill.detail}
+                            </p>
+                          </div>
+
+                          <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-emerald-400" />
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                </CardBox>
-              </motion.div>
-            ))}
+                </motion.div>
+              );
+            })}
           </div>
         </Section>
 
@@ -998,9 +998,11 @@ export default function Portfolio() {
                       <p className="text-xs text-emerald-500">
                         {certificate.issuer} · {certificate.date}
                       </p>
+
                       <h3 className="mt-2 font-semibold">
                         {certificate.name}
                       </h3>
+
                       <p className="mt-2 min-h-[40px] text-xs leading-5 text-zinc-500">
                         {certificate.description}
                       </p>
