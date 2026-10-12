@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import {
   Github,
@@ -76,6 +76,9 @@ const projects = [
       "Tailwind CSS",
     ],
     repo: "https://github.com/anshu706/Threat-Zone",
+    video: "/videos/threat-zone-demo.mp4",
+    drive:
+      "https://drive.google.com/file/d/1lo_HAmuBD-aL_l1Zgq3dcha6AVuhIbX6/view?usp=sharing",
     demo: "https://threat-zone.vercel.app/",
     preview: "Industrial Hazard Modeling • GIS Visualization",
   },
@@ -104,6 +107,9 @@ const projects = [
       "AWS",
     ],
     repo: "https://github.com/anshu706/Construction-Project",
+    video: "/videos/construction-demo.mp4",
+    drive:
+      "https://drive.google.com/file/d/1ouUPrA-vxLA-ZxwYo0ckDbvL96AsUYta/view?usp=sharing",
     demo: "https://construction-project-liard.vercel.app/",
     preview: "Construction Operations • Progress & Budget Analytics",
   },
@@ -293,6 +299,63 @@ const ExternalLinkButton = ({ href, children }) => (
     <ArrowUpRight className="h-4 w-4" />
   </a>
 );
+
+/* Muted, looping autoplay video. Clicking it opens the Google Drive video.
+   It only plays while it is on screen, to save data and battery. */
+const VideoPreview = ({ src, href, title }) => {
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    el.muted = true; // browsers only allow autoplay when muted
+
+    if (typeof IntersectionObserver === "undefined") {
+      el.play().catch(() => {});
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.play().catch(() => {});
+        } else {
+          el.pause();
+        }
+      },
+      { threshold: 0.35 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [src]);
+
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      aria-label={`Open ${title} video`}
+      className="relative block min-h-[300px] w-full flex-1 cursor-pointer bg-black focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
+    >
+      <video
+        ref={ref}
+        src={src}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        className="absolute inset-0 h-full w-full object-contain"
+      />
+
+      <span className="pointer-events-none absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-black/60 px-3 py-1.5 text-[11px] font-medium text-white backdrop-blur">
+        Watch full video
+        <ArrowUpRight className="h-3.5 w-3.5" />
+      </span>
+    </a>
+  );
+};
 
 /* -------------------------------------------------------------------------- */
 /*                         ANIMATED FLOATING DOCK                            */
@@ -833,9 +896,11 @@ export default function Portfolio() {
                         </div>
 
                         <span className="ml-2 truncate text-[11px] text-zinc-500">
-                          {project.demo
-                            ? "Live Preview"
-                            : `${project.title} · Project Overview`}
+                          {project.video
+                            ? "Demo Video"
+                            : project.demo
+                              ? "Live Preview"
+                              : `${project.title} · Project Overview`}
                         </span>
 
                         {project.demo && (
@@ -851,7 +916,13 @@ export default function Portfolio() {
                         )}
                       </div>
 
-                      {project.demo ? (
+                      {project.video ? (
+                        <VideoPreview
+                          src={project.video}
+                          href={project.drive || project.demo}
+                          title={project.title}
+                        />
+                      ) : project.demo ? (
                         <iframe
                           title={`${project.title} live preview`}
                           src={project.demo}
