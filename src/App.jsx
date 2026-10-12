@@ -16,7 +16,7 @@ import {
   Cloud,
   Terminal,
   Workflow,
-  Award,
+  Award, 
   ArrowUpRight,
   Sparkles,
   X,
