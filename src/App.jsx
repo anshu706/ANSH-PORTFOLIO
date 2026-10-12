@@ -14,18 +14,84 @@ const EMAIL = "anshupadhayay212@gmail.com";
 const GITHUB = "https://github.com/anshu706";
 const LINKEDIN = "https://www.linkedin.com/in/ansh-upadhayay-011b77310/";
 
+
 const projects = [
   {
     title: "Python Projects Collection",
     year: "2025",
     level: "Collection",
     category: "Python",
-    description: "A collection of Python mini-projects, with a browser-based project page available as a demo.",
-    features: ["Multiple mini-projects", "Python practice", "Project showcase"],
+    description:
+      "A collection of Python mini-projects, with a browser-based project page available as a demo.",
+    features: [
+      "Multiple mini-projects",
+      "Python practice",
+      "Project showcase",
+    ],
     stack: ["Python", "Tkinter", "GitHub Pages"],
     repo: "https://github.com/anshu706/Py1Projects",
     demo: "https://anshu706.github.io/Py1Projects/",
     preview: "Python Projects • Live site",
+  },
+
+  // PROJECT 2: THREAT-ZONE
+  {
+    title: "Threat-Zone",
+    year: "2026",
+    level: "Advanced",
+    category: "Web",
+    description:
+      "An industrial safety and hazard-visualization platform for modeling explosion consequences, analyzing risk zones, and supporting emergency planning through interactive maps and analytics.",
+    features: [
+      "Models Vapor Cloud Explosions (VCE) and BLEVE fireballs.",
+      "Visualizes four hazard zones using interactive 2D/3D mapping.",
+      "Estimates blast overpressure, TNT equivalency, and thermal radiation.",
+      "Includes refinery presets, wind controls, risk charts, and safety advisories.",
+      "Supports sharing simulation scenarios through URL-based state serialization.",
+    ],
+    stack: [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Deck.gl",
+      "Leaflet",
+      "GSAP",
+      "Recharts",
+      "Tailwind CSS",
+    ],
+    repo: "https://github.com/anshu706/Threat-Zone",
+    demo: "",
+    preview: "Industrial Hazard Modeling • GIS Visualization",
+  },
+
+  // PROJECT 3: CONSTRUCTION PROJECT
+  {
+    title: "Construction Project Monitoring Dashboard",
+    year: "2026",
+    level: "Advanced",
+    category: "Web",
+    description:
+      "A construction project monitoring dashboard concept designed to bring project progress, schedules, budgets, site conditions, and safety indicators into a unified operational view.",
+    features: [
+      "Displays project status, completion progress, and key performance indicators.",
+      "Supports Gantt-based scheduling, milestones, task dependencies, and critical-path tracking.",
+      "Tracks budget utilization, cost variance, and Schedule and Cost Performance Indexes (SPI/CPI).",
+      "Includes weather-impact monitoring, safety alerts, and resource-utilization indicators.",
+      "Designed for role-based dashboards, reporting, and data-driven project decisions.",
+    ],
+    stack: [
+      "React",
+      "Node.js",
+      "PostgreSQL",
+      "InfluxDB",
+      "WebSockets",
+      "Docker",
+      "Kubernetes",
+      "AWS",
+    ],
+    repo: "",
+    demo: "",
+    preview: "Construction Operations • Progress & Budget Analytics",
   },
 ];
 
