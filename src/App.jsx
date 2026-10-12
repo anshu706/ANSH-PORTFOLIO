@@ -261,7 +261,7 @@ const ExternalLinkButton = ({ href, children }) => (
 const dockItems = [
   { id: "home", label: "Home", Icon: Globe },
   { id: "projects", label: "Projects", Icon: Code2 },
-  { id: "skills", label: "Skills", Icon: Terminal, badge: 3 },
+  { id: "skills", label: "Skills", Icon: Terminal },
   { id: "certificates", label: "Certificates", Icon: Award },
   { id: "about", label: "About", Icon: Sparkles },
 ];
