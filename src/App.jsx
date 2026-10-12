@@ -16,54 +16,6 @@ const LINKEDIN = "https://www.linkedin.com/in/ansh-upadhayay-011b77310/";
 
 const projects = [
   {
-    title: "Minesweeper",
-    year: "2025",
-    level: "Intermediate",
-    category: "Python",
-    description: "A classic Minesweeper game built with Python and Tkinter, featuring a graphical interface and interactive gameplay.",
-    features: ["Interactive game board", "Mine and flag logic", "Desktop GUI"],
-    stack: ["Python", "Tkinter"],
-    repo: "https://github.com/anshu706/Py1Projects/blob/main/Phase-2/minesweeper.py",
-    demo: "",
-    preview: "Minesweeper • Desktop game",
-  },
-  {
-    title: "Sudoku Solver",
-    year: "2025",
-    level: "Intermediate",
-    category: "Python",
-    description: "A Sudoku solver built with Python and Tkinter, combining a simple interface with logic for solving number puzzles.",
-    features: ["Sudoku grid interface", "Puzzle-solving logic", "Input validation"],
-    stack: ["Python", "Tkinter"],
-    repo: "https://github.com/anshu706/Py1Projects/blob/main/Phase-2/sudoku_solver.py",
-    demo: "",
-    preview: "Sudoku Solver • Desktop app",
-  },
-  {
-    title: "Rock Paper Scissors",
-    year: "2025",
-    level: "Beginner",
-    category: "Python",
-    description: "A desktop version of the classic game, built with Python and Tkinter.",
-    features: ["Player interaction", "Round outcomes", "Simple desktop UI"],
-    stack: ["Python", "Tkinter"],
-    repo: "https://github.com/anshu706/Py1Projects/blob/main/Phase-2/rock_paper_scissors.py",
-    demo: "",
-    preview: "Rock Paper Scissors • Game",
-  },
-  {
-    title: "AIM Trainer",
-    year: "2025",
-    level: "Advanced",
-    category: "Python",
-    description: "An aim-training project designed to help users practice mouse accuracy with feedback during gameplay.",
-    features: ["Target practice", "Timed interaction", "Performance feedback"],
-    stack: ["Python", "Tkinter"],
-    repo: "https://github.com/anshu706/Py1Projects/blob/main/Phase-2/aim_trainer.py",
-    demo: "",
-    preview: "AIM Trainer • Practice tool",
-  },
-  {
     title: "Python Projects Collection",
     year: "2025",
     level: "Collection",
@@ -283,54 +235,265 @@ export default function Portfolio() {
           </div>
         </section>
 
-        {/* PROJECTS */}
-        <Section id="projects" title="Selected Projects" eyebrow="Things I’ve built" right={<span className="text-sm text-zinc-500">{filteredProjects.length} projects</span>}>
-          <div className="mb-6 flex flex-col gap-3 sm:flex-row">
-            <div className={`flex flex-1 items-center gap-2 rounded-xl border px-3 ${dark ? "border-white/10 bg-zinc-900" : "border-black/10 bg-white"}`}>
-              <Sparkles className="h-4 w-4 text-zinc-500"/>
-              <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search projects, tools, features..." className="w-full bg-transparent py-3 text-sm outline-none placeholder:text-zinc-500"/>
+
+{/* PROJECTS */}
+<Section
+  id="projects"
+  title="Selected Projects"
+  eyebrow="Things I’ve built"
+  right={
+    <span className="text-sm text-zinc-500">
+      {filteredProjects.length} projects
+    </span>
+  }
+>
+  {/* Search and filters */}
+  <div className="mb-6 flex flex-col gap-3 sm:flex-row">
+    <div
+      className={`flex flex-1 items-center gap-2 rounded-xl border px-3 ${
+        dark
+          ? "border-white/10 bg-zinc-900"
+          : "border-black/10 bg-white"
+      }`}
+    >
+      <Sparkles className="h-4 w-4 text-zinc-500" />
+
+      <input
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder="Search projects, tools, features..."
+        className="w-full bg-transparent py-3 text-sm outline-none placeholder:text-zinc-500"
+      />
+    </div>
+
+    <div className="flex flex-wrap gap-2">
+      {categories.map((category) => (
+        <button
+          key={category}
+          onClick={() => setActiveCategory(category)}
+          className={`rounded-xl border px-3 py-2 text-sm transition duration-300 hover:-translate-y-0.5 ${
+            activeCategory === category
+              ? "border-emerald-400/50 bg-emerald-400/10 text-emerald-500"
+              : dark
+                ? "border-white/10 text-zinc-300 hover:bg-white/5"
+                : "border-black/10 text-zinc-700 hover:bg-black/5"
+          }`}
+        >
+          {category}
+        </button>
+      ))}
+    </div>
+  </div>
+
+  {/* Project cards */}
+  <div className="grid gap-5">
+    {filteredProjects.map((project, index) => (
+      <motion.article
+        key={project.title}
+        initial={{ opacity: 0, y: 22 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.12 }}
+        transition={{
+          duration: 0.45,
+          delay: Math.min(index * 0.04, 0.2),
+        }}
+        className={`group overflow-hidden rounded-2xl border transition duration-300 hover:-translate-y-1 hover:border-emerald-400/40 ${
+          dark
+            ? "border-white/10 bg-zinc-900/80"
+            : "border-black/10 bg-white"
+        }`}
+      >
+        <div className="grid lg:grid-cols-[0.95fr_1.05fr]">
+
+          {/* Project information */}
+          <div className="flex flex-col p-5 sm:p-7">
+            <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
+              <span className="text-xs text-zinc-500">
+                {project.year}
+                {project.level ? ` · ${project.level}` : ""}
+              </span>
+
+              <Pill>{project.category}</Pill>
             </div>
-            <div className="flex flex-wrap gap-2">
-              {categories.map((category) => <button key={category} onClick={() => setActiveCategory(category)} className={`rounded-xl border px-3 py-2 text-sm transition ${activeCategory === category ? "border-emerald-400/50 bg-emerald-400/10 text-emerald-500" : "border-white/10 hover:bg-white/5"}`}>{category}</button>)}
+
+            <h3 className="text-xl font-semibold tracking-tight">
+              {project.title}
+            </h3>
+
+            <p
+              className={`mt-3 text-sm leading-6 ${
+                dark ? "text-zinc-300" : "text-zinc-600"
+              }`}
+            >
+              {project.description}
+            </p>
+
+            {project.features?.length > 0 && (
+              <div className="mt-5">
+                <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-zinc-500">
+                  Key Highlights
+                </p>
+
+                <ul className="space-y-2.5 text-sm">
+                  {project.features.map((feature) => (
+                    <li
+                      key={feature}
+                      className="flex items-start gap-2"
+                    >
+                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400" />
+
+                      <span
+                        className={
+                          dark ? "text-zinc-300" : "text-zinc-700"
+                        }
+                      >
+                        {feature}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {/* Technology stack */}
+            <div className="mt-5">
+              <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-zinc-500">
+                Built With
+              </p>
+
+              <div className="flex flex-wrap gap-2">
+                {project.stack.map((tech) => (
+                  <Pill key={tech}>{tech}</Pill>
+                ))}
+              </div>
+            </div>
+
+            {/* Links */}
+            <div className="mt-auto flex flex-wrap gap-4 pt-6">
+              {project.repo && (
+                <ExternalLinkButton href={project.repo}>
+                  <Github className="h-4 w-4" />
+                  Source Code
+                </ExternalLinkButton>
+              )}
+
+              {project.demo && (
+                <ExternalLinkButton href={project.demo}>
+                  <Globe className="h-4 w-4" />
+                  Open Live Demo
+                </ExternalLinkButton>
+              )}
             </div>
           </div>
-          <div className="grid gap-5">
-            {filteredProjects.map((project, index) => (
-              <motion.article key={project.title} initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .12 }} transition={{ duration: .45, delay: index * .04 }} className={`group overflow-hidden rounded-2xl border transition duration-300 hover:border-emerald-400/30 ${dark ? "border-white/10 bg-zinc-900/80" : "border-black/10 bg-white"}`}>
-                <div className="grid lg:grid-cols-[.9fr_1.1fr]">
-                  <div className="flex flex-col p-5 sm:p-7">
-                    <div className="mb-4 flex flex-wrap items-center justify-between gap-2"><span className="text-xs text-zinc-500">{project.year} · {project.level}</span><Pill>{project.category}</Pill></div>
-                    <h3 className="text-xl font-semibold tracking-tight">{project.title}</h3>
-                    <p className={`mt-3 text-sm leading-6 ${dark ? "text-zinc-300" : "text-zinc-600"}`}>{project.description}</p>
-                    <div className="mt-5"><p className="mb-2 text-xs font-semibold uppercase tracking-wider text-zinc-500">Highlights</p><ul className="space-y-2 text-sm">{project.features.map((feature) => <li key={feature} className="flex items-start gap-2"><span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400"/>{feature}</li>)}</ul></div>
-                    <div className="mt-5 flex flex-wrap gap-2">{project.stack.map((tech) => <Pill key={tech}>{tech}</Pill>)}</div>
-                    <div className="mt-auto flex flex-wrap gap-4 pt-6">
-                      {project.repo && <ExternalLinkButton href={project.repo}><Github className="h-4 w-4"/> Source code</ExternalLinkButton>}
-                      {project.demo && <ExternalLinkButton href={project.demo}><Globe className="h-4 w-4"/> Open live demo</ExternalLinkButton>}
-                    </div>
-                  </div>
-                  <div className={`min-h-[260px] border-t p-3 lg:border-l lg:border-t-0 ${dark ? "border-white/10 bg-black/30" : "border-black/10 bg-zinc-100"}`}>
-                    <div className="flex h-full min-h-[260px] flex-col overflow-hidden rounded-xl border border-white/10 bg-[#101114]">
-                      <div className="flex items-center gap-2 border-b border-white/10 px-3 py-2.5"><div className="flex gap-1"><span className="h-2 w-2 rounded-full bg-rose-400"/><span className="h-2 w-2 rounded-full bg-amber-300"/><span className="h-2 w-2 rounded-full bg-emerald-400"/></div><span className="ml-1 truncate text-[11px] text-zinc-500">{project.demo ? "Live preview · embedded website" : "Project preview"}</span></div>
-                      {project.demo ? (
-                        <iframe title={`${project.title} live preview`} src={project.demo} loading="lazy" className="min-h-[260px] w-full flex-1 bg-white" sandbox="allow-scripts allow-same-origin allow-forms allow-popups" />
-                      ) : (
-                        <div className="relative flex flex-1 flex-col items-center justify-center overflow-hidden p-6 text-center">
-                          <div className="absolute h-40 w-40 rounded-full bg-emerald-400/10 blur-3xl"/>
-                          <div className="relative mb-4 flex h-16 w-16 items-center justify-center rounded-2xl border border-emerald-400/25 bg-emerald-400/10 text-emerald-300"><Code2 className="h-8 w-8"/></div>
-                          <p className="relative text-sm font-semibold text-white">{project.preview}</p>
-                          <p className="relative mt-2 max-w-xs text-xs leading-5 text-zinc-500">No browser demo is configured for this desktop project. Open the source code to explore it.</p>
-                          {project.repo && <a href={project.repo} target="_blank" rel="noreferrer" className="relative mt-4 inline-flex items-center gap-2 rounded-full border border-white/15 px-3 py-2 text-xs text-zinc-200 transition hover:border-emerald-400/40 hover:text-emerald-300">View source <ArrowUpRight className="h-3.5 w-3.5"/></a>}
-                        </div>
-                      )}
-                    </div>
-                  </div>
+
+          {/* Preview panel */}
+          <div
+            className={`min-h-[300px] border-t p-3 lg:border-l lg:border-t-0 ${
+              dark
+                ? "border-white/10 bg-black/30"
+                : "border-black/10 bg-zinc-100"
+            }`}
+          >
+            <div className="flex h-full min-h-[300px] flex-col overflow-hidden rounded-xl border border-white/10 bg-[#101114]">
+
+              {/* Browser chrome */}
+              <div className="flex items-center gap-2 border-b border-white/10 px-3 py-3">
+                <div className="flex gap-1.5">
+                  <span className="h-2.5 w-2.5 rounded-full bg-rose-400" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-amber-300" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" />
                 </div>
-              </motion.article>
-            ))}
-            {filteredProjects.length === 0 && <CardBox><p className="text-sm text-zinc-500">No projects match that search. Try another keyword or category.</p></CardBox>}
+
+                <span className="ml-2 truncate text-[11px] text-zinc-500">
+                  {project.demo
+                    ? "Live Preview"
+                    : `${project.title} · Project Overview`}
+                </span>
+
+                {project.demo && (
+                  <a
+                    href={project.demo}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`Open ${project.title} in a new tab`}
+                    className="ml-auto text-zinc-400 transition hover:text-emerald-300"
+                  >
+                    <ArrowUpRight className="h-4 w-4" />
+                  </a>
+                )}
+              </div>
+
+              {project.demo ? (
+                <iframe
+                  title={`${project.title} live preview`}
+                  src={project.demo}
+                  loading="lazy"
+                  className="min-h-[300px] w-full flex-1 bg-white"
+                  sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                />
+              ) : (
+                <div className="relative flex flex-1 flex-col items-center justify-center overflow-hidden p-6 text-center">
+                  {/* Ambient graphics */}
+                  <div className="absolute -left-10 top-10 h-36 w-36 rounded-full bg-emerald-400/10 blur-3xl transition duration-500 group-hover:bg-emerald-400/20" />
+
+                  <div className="absolute -right-10 bottom-0 h-36 w-36 rounded-full bg-cyan-400/10 blur-3xl" />
+
+                  <div className="absolute inset-0 opacity-20">
+                    <div className="h-full w-full bg-[radial-gradient(#71717a_1px,transparent_1px)] [background-size:22px_22px]" />
+                  </div>
+
+                  <div className="relative mb-4 flex h-16 w-16 items-center justify-center rounded-2xl border border-emerald-400/25 bg-emerald-400/10 text-emerald-300 transition duration-500 group-hover:scale-110 group-hover:-rotate-3">
+                    <Code2 className="h-8 w-8" />
+                  </div>
+
+                  <p className="relative text-base font-semibold text-white">
+                    {project.title}
+                  </p>
+
+                  <p className="relative mt-2 max-w-sm text-sm leading-6 text-zinc-400">
+                    {project.preview || "Project overview"}
+                  </p>
+
+                  <div className="relative mt-4 flex flex-wrap justify-center gap-2">
+                    {project.stack.slice(0, 4).map((tech) => (
+                      <span
+                        key={tech}
+                        className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[11px] text-zinc-300"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+
+                  {project.repo && (
+                    <a
+                      href={project.repo}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="relative mt-5 inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-xs font-medium text-zinc-200 transition duration-300 hover:border-emerald-400/40 hover:bg-emerald-400/10 hover:text-emerald-300"
+                    >
+                      <Github className="h-3.5 w-3.5" />
+                      Explore Repository
+                      <ArrowUpRight className="h-3.5 w-3.5" />
+                    </a>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
-        </Section>
+        </div>
+      </motion.article>
+    ))}
+
+    {filteredProjects.length === 0 && (
+      <CardBox>
+        <p className="text-sm text-zinc-500">
+          No projects match that search. Try another keyword or category.
+        </p>
+      </CardBox>
+    )}
+  </div>
+</Section>
 
         {/* SKILLS */}
         <Section id="skills" title="Skills & Toolkit" eyebrow="My engineering toolbox">
