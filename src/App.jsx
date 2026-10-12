@@ -440,11 +440,11 @@ const MatrixRain = ({ dark }) => {
     const ctx = canvas.getContext("2d");
 
     const chars =
-      "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789ABCDEF<>/{}[]=+*$#";
+      "アイウエオカキクケコサシスANSH UPADHAYAYセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789ABCDEF<>/{}[]=+*$#";
     const fontSize = 16;
     const bg = dark ? "0,0,0" : "250,250,250"; // matches the page background
-    const trail = dark ? "#ff1a1a" : "#d90000"; // main red
-    const head = dark ? "#ff9a9a" : "#ff4d4d"; // brighter leading characters
+    const trail = dark ? "#1f6bff" : "#0040d6"; // main blue
+    const head = dark ? "#a8c8ff" : "#4d8dff"; // brighter leading characters
     const frameMs = 45; // lower = faster rain
 
     const reduceMotion = window.matchMedia(
