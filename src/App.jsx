@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Github,
   Linkedin,
@@ -573,6 +573,112 @@ const FloatingDock = ({ dark }) => (
     </nav>
   </motion.div>
 );
+
+
+/* -------------------------------------------------------------------------- */
+/*                           PORTFOLIO INTRO                                  */
+/* -------------------------------------------------------------------------- */
+
+const PortfolioIntro = () => {
+  const [visible, setVisible] = useState(true);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      setVisible(false);
+    }, 6000);
+
+    return () => window.clearTimeout(timer);
+  }, []);
+
+  const skipIntro = () => setVisible(false);
+
+  return (
+    <AnimatePresence>
+      {visible && (
+        <motion.div
+          key="portfolio-intro"
+          initial={{ opacity: 1 }}
+          exit={{ opacity: 0, scale: 1.02 }}
+          transition={{ duration: 0.8, ease: "easeInOut" }}
+          className="fixed inset-0 z-[99999] overflow-hidden bg-black"
+        >
+          {/* Intro video */}
+          <video
+            className="absolute inset-0 h-full w-full object-cover"
+            src="/ascension.mp4"
+            autoPlay
+            muted
+            playsInline
+            preload="auto"
+            onError={(event) => {
+              // If the video cannot load, don't trap visitors on the intro.
+              event.currentTarget.style.display = "none";
+            }}
+          />
+
+          {/* Subtle cinematic overlay */}
+          <div className="absolute inset-0 bg-black/20" />
+
+          {/* ANSH title */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.75, y: 15 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.35, ease: "easeOut" }}
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+          >
+            {/* Black backing helps conceal ASCENSION underneath */}
+            <div className="rounded-xl border border-white/10 bg-black/95 px-6 py-3 shadow-[0_0_60px_rgba(37,99,235,0.25)] sm:px-12 sm:py-5">
+              <h1
+                className="whitespace-nowrap text-5xl font-black tracking-[0.2em] text-white sm:text-7xl md:text-8xl"
+                style={{
+                  textShadow:
+                    "0 0 8px rgba(255,255,255,0.65), 0 0 28px rgba(59,130,246,0.8)",
+                }}
+              >
+                ANSH
+              </h1>
+            </div>
+          </motion.div>
+
+          {/* Name and subtitle */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.9, duration: 0.7 }}
+            className="absolute left-1/2 top-[calc(50%+85px)] -translate-x-1/2 text-center sm:top-[calc(50%+115px)]"
+          >
+            <p className="whitespace-nowrap text-xs font-medium tracking-[0.35em] text-white/85 sm:text-sm">
+              ANSH UPADHAYAY
+            </p>
+            <p className="mt-3 text-[10px] tracking-[0.3em] text-blue-300 sm:text-xs">
+              CLOUD • AUTOMATION • DEVOPS
+            </p>
+          </motion.div>
+
+          {/* Loading progress */}
+          <div className="absolute bottom-0 left-0 h-1 w-full bg-white/10">
+            <motion.div
+              initial={{ width: "0%" }}
+              animate={{ width: "100%" }}
+              transition={{ duration: 6, ease: "linear" }}
+              className="h-full bg-gradient-to-r from-blue-600 via-cyan-300 to-white"
+            />
+          </div>
+
+          {/* Skip intro */}
+          <button
+            type="button"
+            onClick={skipIntro}
+            className="absolute bottom-7 right-5 rounded-full border border-white/25 bg-black/60 px-5 py-2.5 text-sm text-white backdrop-blur-md transition hover:border-white/60 hover:bg-white/10 sm:bottom-10 sm:right-10"
+          >
+            Skip Intro <span aria-hidden="true">→</span>
+          </button>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+};
+
 
 /* -------------------------------------------------------------------------- */
 /*                              MAIN PORTFOLIO                                */
