@@ -428,6 +428,99 @@ const VideoPreview = ({ src, href, title, fallback }) => {
 };
 
 /* -------------------------------------------------------------------------- */
+/*                         RED MATRIX RAIN BACKGROUND                         */
+/* -------------------------------------------------------------------------- */
+
+const MatrixRain = ({ dark }) => {
+  const canvasRef = useRef(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+
+    const chars =
+      "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789ABCDEF<>/{}[]=+*$#";
+    const fontSize = 16;
+    const bg = dark ? "0,0,0" : "250,250,250"; // matches the page background
+    const trail = dark ? "#ff1a1a" : "#d90000"; // main red
+    const head = dark ? "#ff9a9a" : "#ff4d4d"; // brighter leading characters
+    const frameMs = 45; // lower = faster rain
+
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    let width = 0;
+    let height = 0;
+    let drops = [];
+    let rafId = 0;
+    let last = 0;
+
+    const resize = () => {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.fillStyle = `rgb(${bg})`;
+      ctx.fillRect(0, 0, width, height);
+
+      const columns = Math.ceil(width / fontSize);
+      drops = Array.from({ length: columns }, () =>
+        Math.floor((Math.random() * -height) / fontSize)
+      );
+    };
+
+    const draw = (time) => {
+      rafId = requestAnimationFrame(draw);
+      if (time - last < frameMs) return;
+      last = time;
+
+      // translucent fill leaves the fading trails
+      ctx.fillStyle = `rgba(${bg},0.07)`;
+      ctx.fillRect(0, 0, width, height);
+      ctx.font = `${fontSize}px monospace`;
+
+      for (let i = 0; i < drops.length; i++) {
+        const y = drops[i] * fontSize;
+
+        if (y > 0) {
+          const ch = chars[Math.floor(Math.random() * chars.length)];
+          ctx.fillStyle = Math.random() > 0.93 ? head : trail;
+          ctx.fillText(ch, i * fontSize, y);
+        }
+
+        if (y > height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      }
+    };
+
+    resize();
+    window.addEventListener("resize", resize);
+
+    // Respect "reduce motion": keep a plain background, no animation
+    if (!reduceMotion) rafId = requestAnimationFrame(draw);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      window.removeEventListener("resize", resize);
+    };
+  }, [dark]);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      aria-hidden="true"
+      className={`pointer-events-none fixed inset-0 z-0 h-full w-full ${
+        dark ? "opacity-40" : "opacity-25"
+      }`}
+    />
+  );
+};
+
+/* -------------------------------------------------------------------------- */
 /*                         ANIMATED FLOATING DOCK                            */
 /* -------------------------------------------------------------------------- */
 
@@ -558,6 +651,8 @@ export default function Portfolio() {
     <div
       className={`min-h-screen antialiased transition-colors duration-500 ${themeClasses}`}
     >
+      <MatrixRain dark={dark} />
+
       <style>{`
         @keyframes certificateMarquee {
           from { transform: translateX(0); }
@@ -676,7 +771,7 @@ export default function Portfolio() {
       </header>
 
       {/* MAIN CONTENT */}
-      <main className="pb-24">
+      <main className="relative z-10 pb-24">
         {/* HERO */}
         <section id="home" className="relative isolate overflow-hidden">
           <div className="portfolio-grid pointer-events-none absolute inset-0 -z-10 opacity-80" />
@@ -1349,7 +1444,7 @@ export default function Portfolio() {
       <FloatingDock dark={dark} />
 
       {/* FOOTER */}
-      <footer className="border-t border-white/10 px-4 py-8 text-right text-xs text-zinc-500">
+      <footer className="relative z-10 border-t border-white/10 px-4 py-8 text-right text-xs text-zinc-500">
         <p>
           Designed & built by{" "}
           <span className="text-zinc-300">{NAME}</span>
