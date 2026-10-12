@@ -48,6 +48,7 @@ const projects = [
     ],
     stack: ["Python", "Tkinter", "GitHub Pages"],
     repo: "https://github.com/anshu706/PYTHON-PROJECTS",
+    loom: "e8eb5fe02a4d41688b0d087adefbd6d8",
     demo: "https://python-projects-seven-ruddy.vercel.app/",
     preview: "Python Projects • Live site",
   },
@@ -951,7 +952,7 @@ export default function Portfolio() {
                         </div>
 
                         <span className="ml-2 truncate text-[11px] text-zinc-500">
-                          {project.video
+                          {project.video || project.loom
                             ? "Demo Video"
                             : project.demo
                               ? "Live Preview"
@@ -977,6 +978,15 @@ export default function Portfolio() {
                           href={project.drive || project.demo}
                           title={project.title}
                           fallback={<ProjectOverview project={project} />}
+                        />
+                      ) : project.loom ? (
+                        <iframe
+                          title={`${project.title} demo video`}
+                          src={`https://www.loom.com/embed/${project.loom}?autoplay=1&muted=1&hideEmbedTopBar=true`}
+                          loading="lazy"
+                          allow="autoplay; fullscreen; picture-in-picture"
+                          allowFullScreen
+                          className="min-h-[300px] w-full flex-1 bg-black"
                         />
                       ) : project.demo ? (
                         <iframe
