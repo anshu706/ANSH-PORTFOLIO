@@ -49,6 +49,8 @@ const projects = [
     stack: ["Python", "Tkinter", "GitHub Pages"],
     repo: "https://github.com/anshu706/PYTHON-PROJECTS",
     loom: "e8eb5fe02a4d41688b0d087adefbd6d8",
+    video: "/videos/python-projects-demo.mp4",
+    videoLink: "https://www.loom.com/share/e8eb5fe02a4d41688b0d087adefbd6d8",
     demo: "https://python-projects-seven-ruddy.vercel.app/",
     preview: "Python Projects • Live site",
   },
@@ -78,7 +80,7 @@ const projects = [
     ],
     repo: "https://github.com/anshu706/Threat-Zone",
     video: "/videos/threat-zone-demo.mp4",
-    drive:
+    videoLink:
       "https://drive.google.com/file/d/1lo_HAmuBD-aL_l1Zgq3dcha6AVuhIbX6/view?usp=sharing",
     demo: "https://threat-zone.vercel.app/",
     preview: "Industrial Hazard Modeling • GIS Visualization",
@@ -109,7 +111,7 @@ const projects = [
     ],
     repo: "https://github.com/anshu706/Construction-Project",
     video: "/videos/construction-demo.mp4",
-    drive:
+    videoLink:
       "https://drive.google.com/file/d/1ouUPrA-vxLA-ZxwYo0ckDbvL96AsUYta/view?usp=sharing",
     demo: "https://construction-project-liard.vercel.app/",
     preview: "Construction Operations • Progress & Budget Analytics",
@@ -350,7 +352,19 @@ const ProjectOverview = ({ project }) => (
   </div>
 );
 
-/* Muted, looping autoplay video. Clicking it opens the Google Drive video.
+/* Loom embed (autoplays muted). Loom has no loop option, so it plays once. */
+const LoomEmbed = ({ id, title }) => (
+  <iframe
+    title={`${title} demo video`}
+    src={`https://www.loom.com/embed/${id}?autoplay=1&muted=1&hideEmbedTopBar=true`}
+    loading="lazy"
+    allow="autoplay; fullscreen; picture-in-picture"
+    allowFullScreen
+    className="min-h-[300px] w-full flex-1 bg-black"
+  />
+);
+
+/* Muted, looping autoplay video. Clicking it opens the linked video (Drive / Loom).
    It only plays while it is on screen, to save data and battery. */
 const VideoPreview = ({ src, href, title, fallback }) => {
   const ref = useRef(null);
@@ -741,12 +755,7 @@ export default function Portfolio() {
                     : "border-black/10 bg-white shadow-zinc-200"
                 }`}
               >
-                <div className="mb-5 flex items-center justify-between">
-                  <div className="flex gap-1.5">
-                    <span className="h-2.5 w-2.5 rounded-full bg-rose-400" />
-                    <span className="h-2.5 w-2.5 rounded-full bg-amber-300" />
-                    <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" />
-                  </div>
+                <div className="mb-5 flex items-center justify-end">
                   <span className="text-xs text-zinc-500">
                     developer.profile
                   </span>
@@ -944,50 +953,21 @@ export default function Portfolio() {
                     }`}
                   >
                     <div className="flex h-full min-h-[300px] flex-col overflow-hidden rounded-xl border border-white/10 bg-[#101114]">
-                      <div className="flex items-center gap-2 border-b border-white/10 px-3 py-3">
-                        <div className="flex gap-1.5">
-                          <span className="h-2.5 w-2.5 rounded-full bg-rose-400" />
-                          <span className="h-2.5 w-2.5 rounded-full bg-amber-300" />
-                          <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" />
-                        </div>
-
-                        <span className="ml-2 truncate text-[11px] text-zinc-500">
-                          {project.video || project.loom
-                            ? "Demo Video"
-                            : project.demo
-                              ? "Live Preview"
-                              : `${project.title} · Project Overview`}
-                        </span>
-
-                        {project.demo && (
-                          <a
-                            href={project.demo}
-                            target="_blank"
-                            rel="noreferrer"
-                            aria-label={`Open ${project.title} in a new tab`}
-                            className="ml-auto text-zinc-400 transition hover:text-emerald-300"
-                          >
-                            <ArrowUpRight className="h-4 w-4" />
-                          </a>
-                        )}
-                      </div>
-
                       {project.video ? (
                         <VideoPreview
                           src={project.video}
-                          href={project.drive || project.demo}
+                          href={project.videoLink || project.demo}
                           title={project.title}
-                          fallback={<ProjectOverview project={project} />}
+                          fallback={
+                            project.loom ? (
+                              <LoomEmbed id={project.loom} title={project.title} />
+                            ) : (
+                              <ProjectOverview project={project} />
+                            )
+                          }
                         />
                       ) : project.loom ? (
-                        <iframe
-                          title={`${project.title} demo video`}
-                          src={`https://www.loom.com/embed/${project.loom}?autoplay=1&muted=1&hideEmbedTopBar=true`}
-                          loading="lazy"
-                          allow="autoplay; fullscreen; picture-in-picture"
-                          allowFullScreen
-                          className="min-h-[300px] w-full flex-1 bg-black"
-                        />
+                        <LoomEmbed id={project.loom} title={project.title} />
                       ) : project.demo ? (
                         <iframe
                           title={`${project.title} live preview`}
