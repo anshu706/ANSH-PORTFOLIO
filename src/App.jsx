@@ -1185,4 +1185,3 @@ export default function Portfolio() {
     </div>
   );
 }
-Provide the full code with updated floating deck code
