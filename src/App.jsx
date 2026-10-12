@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import {
   Github,
@@ -18,9 +18,9 @@ import {
   Workflow,
   Award,
   ArrowUpRight,
-  Pause,
-  Play,
   Sparkles,
+  X,
+  ZoomIn,
 } from "lucide-react";
 
 const NAME = "Ansh Upadhayay";
@@ -174,31 +174,76 @@ const skillGroups = [
 
 const certificates = [
   {
-    name: "Add your certificate",
-    issuer: "Certificate issuer",
-    date: "Year",
+    name: "AWS Academy Cloud Foundations",
+    issuer: "AWS Academy",
+    date: "",
     verify: "",
-    image: "",
+    image: "/certificates/aws-academy-cloud-foundations.png",
     description:
-      "Add the credential title, issuer, and verification link here.",
+      "Trained badge covering core AWS cloud concepts, services, security and pricing.",
   },
   {
-    name: "Cloud / DevOps Credential",
-    issuer: "Add issuing platform",
-    date: "Year",
+    name: "AWS Cloud Practitioner (CLF-C02) Practice Exam",
+    issuer: "AWS Training & Certification",
+    date: "Jul 21, 2026",
     verify: "",
-    image: "",
+    image: "/certificates/aws-cloud-practitioner-clf-c02.png",
     description:
-      "A verified credential related to cloud, Linux, automation or DevOps.",
+      "Completed the official practice exam for AWS Certified Cloud Practitioner.",
   },
   {
-    name: "Technical Learning Badge",
-    issuer: "Add issuing platform",
-    date: "Year",
+    name: "AWS Solutions Architect Associate (SAA-C03) Practice Exam",
+    issuer: "AWS Training & Certification",
+    date: "Jul 9, 2026",
     verify: "",
-    image: "",
+    image: "/certificates/aws-solutions-architect-saa-c03.png",
     description:
-      "Showcase a course completion badge or technical achievement.",
+      "Completed the official practice exam for AWS Certified Solutions Architect – Associate.",
+  },
+  {
+    name: "AWS Developer Associate (DVA-C02) Practice Exam",
+    issuer: "AWS Training & Certification",
+    date: "Jul 17, 2026",
+    verify: "",
+    image: "/certificates/aws-developer-dva-c02.png",
+    description:
+      "Completed the official practice exam for AWS Certified Developer – Associate.",
+  },
+  {
+    name: "AWS AI Practitioner (AIF-C01) Practice Exam",
+    issuer: "AWS Training & Certification",
+    date: "Aug 3, 2026",
+    verify: "",
+    image: "/certificates/aws-ai-practitioner-aif-c01.png",
+    description:
+      "Completed the official practice exam for AWS Certified AI Practitioner.",
+  },
+  {
+    name: "Arcade Simulator: DevOps Engineer",
+    issuer: "Google Cloud Skills Arcade",
+    date: "Sep 12, 2026",
+    verify: "",
+    image: "/certificates/google-cloud-arcade-devops.png",
+    description:
+      "Google Skills Arcade badge for completing the DevOps Engineer simulator.",
+  },
+  {
+    name: "Claude 101",
+    issuer: "Anthropic",
+    date: "",
+    verify: "",
+    image: "/certificates/claude-101.png",
+    description:
+      "Certificate of completion for Anthropic's introductory Claude course.",
+  },
+  {
+    name: "AI Fluency: Framework & Foundations",
+    issuer: "Anthropic",
+    date: "",
+    verify: "",
+    image: "/certificates/ai-fluency.png",
+    description:
+      "Certificate of completion covering the foundations of working effectively with AI.",
   },
 ];
 
@@ -261,7 +306,7 @@ const ExternalLinkButton = ({ href, children }) => (
 const dockItems = [
   { id: "home", label: "Home", Icon: Globe },
   { id: "projects", label: "Projects", Icon: Code2 },
-  { id: "skills", label: "Skills", Icon: Terminal },
+  { id: "skills", label: "Skills", Icon: Terminal, badge: 3 },
   { id: "certificates", label: "Certificates", Icon: Award },
   { id: "about", label: "About", Icon: Sparkles },
 ];
@@ -332,6 +377,22 @@ export default function Portfolio() {
   const [query, setQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
   const [carouselPaused, setCarouselPaused] = useState(false);
+  const [selectedCert, setSelectedCert] = useState(null);
+
+  // Close the certificate preview with Esc and lock page scroll while open
+  useEffect(() => {
+    if (!selectedCert) return;
+    const onKey = (e) => {
+      if (e.key === "Escape") setSelectedCert(null);
+    };
+    window.addEventListener("keydown", onKey);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [selectedCert]);
 
   const categories = [
     "All",
@@ -373,7 +434,7 @@ export default function Portfolio() {
         .certificate-track {
           display: flex;
           width: max-content;
-          animation: certificateMarquee 34s linear infinite;
+          animation: certificateMarquee 70s linear infinite;
         }
 
         .certificate-track.paused {
@@ -942,30 +1003,7 @@ export default function Portfolio() {
           id="certificates"
           title="Certificates & Learning"
           eyebrow="Proof of progress"
-          right={
-            <button
-              onClick={() => setCarouselPaused(!carouselPaused)}
-              className="inline-flex items-center gap-2 rounded-full border border-white/15 px-3 py-2 text-xs transition hover:bg-white/10"
-            >
-              {carouselPaused ? (
-                <Play className="h-3.5 w-3.5" />
-              ) : (
-                <Pause className="h-3.5 w-3.5" />
-              )}
-              {carouselPaused ? "Play carousel" : "Pause carousel"}
-            </button>
-          }
         >
-          <p
-            className={`mb-6 max-w-2xl text-sm leading-6 ${
-              dark ? "text-zinc-400" : "text-zinc-600"
-            }`}
-          >
-            A moving showcase for course certificates, skill badges, and
-            verified credentials. Replace the sample cards below with your
-            actual achievements.
-          </p>
-
           <div className="relative overflow-hidden">
             <div
               className={`pointer-events-none absolute inset-y-0 left-0 z-10 w-10 bg-gradient-to-r ${
@@ -980,7 +1018,7 @@ export default function Portfolio() {
 
             <div
               className={`certificate-track gap-4 py-3 ${
-                carouselPaused ? "paused" : ""
+                carouselPaused || selectedCert ? "paused" : ""
               }`}
               onMouseEnter={() => setCarouselPaused(true)}
               onMouseLeave={() => setCarouselPaused(false)}
@@ -989,18 +1027,41 @@ export default function Portfolio() {
                 (certificate, index) => (
                   <article
                     key={`${certificate.name}-${index}`}
-                    className={`w-[280px] shrink-0 overflow-hidden rounded-2xl border ${
+                    role="button"
+                    tabIndex={0}
+                    aria-label={`View ${certificate.name}`}
+                    onClick={() =>
+                      certificate.image && setSelectedCert(certificate)
+                    }
+                    onKeyDown={(e) => {
+                      if (
+                        (e.key === "Enter" || e.key === " ") &&
+                        certificate.image
+                      ) {
+                        e.preventDefault();
+                        setSelectedCert(certificate);
+                      }
+                    }}
+                    className={`group w-[280px] shrink-0 cursor-pointer overflow-hidden rounded-2xl border transition duration-300 hover:border-emerald-400/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 ${
                       dark
                         ? "border-white/10 bg-zinc-900"
                         : "border-black/10 bg-white"
                     }`}
                   >
                     {certificate.image ? (
-                      <img
-                        src={certificate.image}
-                        alt={`${certificate.name} certificate`}
-                        className="h-36 w-full object-cover"
-                      />
+                      <div className="relative">
+                        <img
+                          src={certificate.image}
+                          alt={`${certificate.name} certificate`}
+                          className="aspect-[4/3] w-full border-b border-black/5 bg-white object-contain"
+                        />
+                        <div className="absolute inset-0 flex items-center justify-center bg-black/45 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
+                          <span className="inline-flex items-center gap-1.5 rounded-full bg-white/90 px-3 py-1.5 text-xs font-medium text-zinc-900">
+                            <ZoomIn className="h-3.5 w-3.5" />
+                            Click to enlarge
+                          </span>
+                        </div>
+                      </div>
                     ) : (
                       <div className="relative flex h-36 items-center justify-center overflow-hidden bg-gradient-to-br from-emerald-500/15 via-cyan-500/10 to-transparent">
                         <div className="absolute -right-5 -top-8 h-28 w-28 rounded-full border border-emerald-400/20" />
@@ -1011,7 +1072,8 @@ export default function Portfolio() {
 
                     <div className="p-4">
                       <p className="text-xs text-emerald-500">
-                        {certificate.issuer} · {certificate.date}
+                        {certificate.issuer}
+                        {certificate.date ? ` · ${certificate.date}` : ""}
                       </p>
 
                       <h3 className="mt-2 font-semibold">
@@ -1027,27 +1089,19 @@ export default function Portfolio() {
                           href={certificate.verify}
                           target="_blank"
                           rel="noreferrer"
+                          onClick={(e) => e.stopPropagation()}
                           className="mt-4 inline-flex items-center gap-1.5 text-xs font-medium text-blue-500 hover:text-cyan-400"
                         >
                           Verify credential
                           <ExternalLink className="h-3.5 w-3.5" />
                         </a>
-                      ) : (
-                        <p className="mt-4 text-xs text-zinc-600">
-                          Add verification link
-                        </p>
-                      )}
+                      ) : null}
                     </div>
                   </article>
                 )
               )}
             </div>
           </div>
-
-          <p className="mt-3 text-xs text-zinc-500">
-            Tip: hover over the cards to pause the motion. The carousel also
-            respects reduced-motion preferences.
-          </p>
         </Section>
 
         {/* ABOUT */}
@@ -1182,6 +1236,40 @@ export default function Portfolio() {
           </div>
         </Section>
       </main>
+
+      {/* CERTIFICATE PREVIEW */}
+      {selectedCert && (
+        <div
+          className="fixed inset-0 z-[60] flex items-center justify-center bg-black/85 p-4 backdrop-blur-sm"
+          onClick={() => setSelectedCert(null)}
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${selectedCert.name} certificate`}
+        >
+          <div
+            className="relative w-full max-w-4xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setSelectedCert(null)}
+              aria-label="Close certificate preview"
+              className="absolute -top-12 right-0 rounded-full border border-white/20 bg-white/10 p-2 text-white transition hover:bg-white/20"
+            >
+              <X className="h-5 w-5" />
+            </button>
+
+            <img
+              src={selectedCert.image}
+              alt={`${selectedCert.name} certificate`}
+              className="mx-auto max-h-[80vh] w-auto max-w-full rounded-xl bg-white object-contain shadow-2xl"
+            />
+
+            <p className="mt-3 text-center text-sm text-zinc-300">
+              {selectedCert.name}
+            </p>
+          </div>
+        </div>
+      )}
 
       {/* ANIMATED DOCK */}
       <FloatingDock dark={dark} />
