@@ -253,55 +253,60 @@ const ExternalLinkButton = ({ href, children }) => (
 /*                         ANIMATED FLOATING DOCK                            */
 /* -------------------------------------------------------------------------- */
 
-```jsx
-import {
-  House,
-  Search,
-  Mail,
-  Folder,
-  Settings,
-} from "lucide-react";
-
 const dockItems = [
-  { icon: House, label: "Home" },
-  { icon: Search, label: "Search" },
-  { icon: Mail, label: "Messages", badge: 3 },
-  { icon: Folder, label: "Projects" },
-  { icon: Settings, label: "Settings" },
+  { id: "home", label: "Home", Icon: Globe },
+  { id: "projects", label: "Projects", Icon: Code2 },
+  { id: "skills", label: "Skills", Icon: Terminal },
+  { id: "certificates", label: "Certificates", Icon: Award },
+  { id: "about", label: "About", Icon: Sparkles },
 ];
 
-function FloatingDock() {
-  return (
-    <div className="fixed bottom-8 left-1/2 z-50 -translate-x-1/2">
-      <div className="flex items-center gap-3 rounded-[35px] border border-white/20 bg-[#171717]/90 p-[18px] shadow-2xl backdrop-blur-2xl">
-        {dockItems.map(({ icon: Icon, label, badge }) => (
-          <button
-            key={label}
-            aria-label={label}
-            title={label}
-            className="group relative flex h-[84px] w-[84px] items-center justify-center rounded-[25px] border border-white/15 bg-gradient-to-br from-[#555555] via-[#292929] to-[#111111] text-white shadow-[inset_0_1px_2px_rgba(255,255,255,0.3),0_4px_10px_rgba(0,0,0,0.3)] transition-all duration-200 hover:-translate-y-1 hover:scale-105 hover:border-white/30 hover:from-[#666666]"
+const FloatingDock = ({ dark }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 24, x: "-50%" }}
+    animate={{ opacity: 1, y: 0, x: "-50%" }}
+    transition={{ duration: 0.5, delay: 0.25 }}
+    className="fixed bottom-5 left-1/2 z-50"
+  >
+    <nav
+      aria-label="Floating navigation"
+      className={`flex items-center gap-2 rounded-2xl border p-2 shadow-2xl backdrop-blur-2xl ${
+        dark
+          ? "border-white/15 bg-zinc-950/80 shadow-black/40"
+          : "border-black/10 bg-white/85 shadow-zinc-400/30"
+      }`}
+    >
+      {dockItems.map(({ id, label, Icon }) => (
+        <motion.a
+          key={id}
+          href={`#${id}`}
+          aria-label={label}
+          title={label}
+          whileHover={{ y: -6, scale: 1.08 }}
+          whileTap={{ scale: 0.94 }}
+          transition={{ type: "spring", stiffness: 400, damping: 20 }}
+          className={`group relative flex h-11 w-11 items-center justify-center rounded-xl border transition-colors duration-200 ${
+            dark
+              ? "border-white/10 bg-white/[0.06] text-zinc-300 hover:border-emerald-400/40 hover:bg-emerald-400/10 hover:text-emerald-300"
+              : "border-black/5 bg-zinc-100 text-zinc-700 hover:border-emerald-400/40 hover:bg-emerald-50 hover:text-emerald-700"
+          }`}
+        >
+          <Icon className="h-5 w-5" />
+
+          <span
+            className={`pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg border px-2.5 py-1.5 text-[11px] font-medium opacity-0 shadow-xl transition-all duration-200 group-hover:-translate-y-1 group-hover:opacity-100 ${
+              dark
+                ? "border-white/10 bg-zinc-900 text-zinc-100"
+                : "border-black/10 bg-white text-zinc-800"
+            }`}
           >
-            <Icon
-              size={47}
-              strokeWidth={2.1}
-              className="drop-shadow-sm"
-            />
-
-            {badge && (
-              <span className="absolute -right-1 -top-1 flex h-[29px] min-w-[29px] items-center justify-center rounded-full border-[3px] border-[#171717] bg-[#ff2638] px-1 text-[16px] font-bold leading-none text-white">
-                {badge}
-              </span>
-            )}
-          </button>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-export default FloatingDock;
-```
-
+            {label}
+          </span>
+        </motion.a>
+      ))}
+    </nav>
+  </motion.div>
+);
 
 /* -------------------------------------------------------------------------- */
 /*                              MAIN PORTFOLIO                                */
@@ -1180,3 +1185,4 @@ export default function Portfolio() {
     </div>
   );
 }
+Provide the full code with updated floating deck code
