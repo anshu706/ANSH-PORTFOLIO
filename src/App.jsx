@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import IntroScreen from "./IntroScreen.jsx";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Github,
@@ -685,6 +686,7 @@ const PortfolioIntro = () => {
 /* -------------------------------------------------------------------------- */
 
 export default function Portfolio() {
+  const [showIntro, setShowIntro] = useState(true);
   const [dark, setDark] = useState(true);
   const [query, setQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
@@ -737,6 +739,7 @@ export default function Portfolio() {
     <div
       className={`min-h-screen antialiased transition-colors duration-500 ${themeClasses}`}
     >
+      {showIntro && <IntroScreen onDone={() => setShowIntro(false)} />}
       <MatrixRain dark={dark} />
 
       <style>{`
@@ -840,6 +843,15 @@ export default function Portfolio() {
             >
               <Linkedin className="h-5 w-5" />
             </a>
+
+            <button
+              onClick={() => setShowIntro(true)}
+              className="inline-flex items-center gap-1.5 rounded-full border border-sky-400/30 bg-sky-500/10 px-2.5 py-1 text-xs font-medium text-sky-300 transition hover:border-sky-400/60 hover:bg-sky-500/20"
+              title="Replay cinematic intro"
+            >
+              <Sparkles className="h-3 w-3" />
+              <span>Intro</span>
+            </button>
 
             <button
               onClick={() => setDark(!dark)}
