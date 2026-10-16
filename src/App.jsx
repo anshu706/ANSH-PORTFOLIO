@@ -36,6 +36,39 @@ const LINKEDIN = "https://www.linkedin.com/in/ansh-upadhayay-011b77310/";
 
 const projects = [
   {
+    title: "Dyslexia Assistant",
+    year: "2026",
+    level: "Advanced",
+    category: "Web",
+    description:
+      "An offline-first, neurodivergent-tailored reading, writing, and cognitive learning workspace engineered for individuals navigating Dyslexia, Irlen Syndrome, and ADHD.",
+    features: [
+      "Provides 8 clinically formulated Irlen spectral tint overlays to eliminate contrast glare and visual jitter.",
+      "Integrates OpenDyslexic & Lexend neuro-typography, bionic fixation reading, and phonetic syllable segmentation.",
+      "Features synchronized Web Speech TTS with real-time word-boundary tracking and an elevated focus box HUD.",
+      "Includes a distraction-free writing studio with sound-alike phonetic spell-check and live Flesch readability metrics.",
+      "Powers a Leitner-based Spaced Repetition System (SRS) with tactile 3D cards and a curated dyslexia starter deck.",
+      "Built with a 100% private, client-side document parser (PDF, DOCX, TXT) and full offline PWA capability.",
+    ],
+    stack: [
+      "React",
+      "Vite",
+      "JavaScript",
+      "Web Speech API",
+      "PDF.js",
+      "Mammoth.js",
+      "PWA",
+      "IndexedDB",
+      "CSS3",
+    ],
+    repo: "https://github.com/anshu706/Dyslexia-Assistant",
+    video: "/videos/dyslexia.mp4",
+    videoLink: "https://dyslexia-assistant-da.vercel.app/",
+    demo: "https://dyslexia-assistant-da.vercel.app/",
+    image: "/projects/dyslexia-assistant-workspace.png",
+    preview: "Assistive Cognitive Workspace • Irlen Tints & SRS Flashcards",
+  },
+  {
     title: "Threat-Zone",
     year: "2026",
     level: "Advanced",
@@ -1152,13 +1185,49 @@ export default function Portfolio() {
                           href={project.videoLink || project.demo}
                           title={project.title}
                           fallback={
-                            project.loom ? (
+                            project.image ? (
+                              <a
+                                href={project.demo || project.repo}
+                                target="_blank"
+                                rel="noreferrer"
+                                aria-label={`Open ${project.title} live demo`}
+                                className="group/img relative flex min-h-[300px] w-full flex-1 overflow-hidden bg-black focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
+                              >
+                                <img
+                                  src={project.image}
+                                  alt={`${project.title} preview`}
+                                  className="h-full w-full object-cover object-top transition-transform duration-500 group-hover/img:scale-105"
+                                />
+                                <span className="pointer-events-none absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-black/60 px-3 py-1.5 text-[11px] font-medium text-white backdrop-blur">
+                                  Open Live Demo
+                                  <ArrowUpRight className="h-3.5 w-3.5" />
+                                </span>
+                              </a>
+                            ) : project.loom ? (
                               <LoomEmbed id={project.loom} title={project.title} />
                             ) : (
                               <ProjectOverview project={project} />
                             )
                           }
                         />
+                      ) : project.image ? (
+                        <a
+                          href={project.demo || project.repo}
+                          target="_blank"
+                          rel="noreferrer"
+                          aria-label={`Open ${project.title} live demo`}
+                          className="group/img relative flex min-h-[300px] w-full flex-1 overflow-hidden bg-black focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
+                        >
+                          <img
+                            src={project.image}
+                            alt={`${project.title} preview`}
+                            className="h-full w-full object-cover object-top transition-transform duration-500 group-hover/img:scale-105"
+                          />
+                          <span className="pointer-events-none absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-black/60 px-3 py-1.5 text-[11px] font-medium text-white backdrop-blur">
+                            Open Live Demo
+                            <ArrowUpRight className="h-3.5 w-3.5" />
+                          </span>
+                        </a>
                       ) : project.loom ? (
                         <LoomEmbed id={project.loom} title={project.title} />
                       ) : project.demo ? (
