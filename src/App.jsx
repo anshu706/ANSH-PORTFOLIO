@@ -63,7 +63,7 @@ const projects = [
     ],
     repo: "https://github.com/anshu706/Dyslexia-Assistant",
     video: "/videos/dyslexia.mp4",
-    videoLink: "https://dyslexia-assistant-da.vercel.app/",
+    videoLink: "https://drive.google.com/file/d/1T1SIbqFrVAshiKZrgLqXc2A4IqL0tFp9/view?usp=sharing",
     demo: "https://dyslexia-assistant-da.vercel.app/",
     image: "/projects/dyslexia-assistant-workspace.png",
     preview: "Assistive Cognitive Workspace • Irlen Tints & SRS Flashcards",
@@ -95,7 +95,7 @@ const projects = [
     repo: "https://github.com/anshu706/Threat-Zone",
     video: "/videos/threat-zone-demo.mp4",
     videoLink:
-      "https://drive.google.com/file/d/1lo_HAmuBD-aL_l1Zgq3dcha6AVuhIbX6/view?usp=sharing",
+      "https://drive.google.com/file/d/1uyvQuIlbj_GVc3gVumrqR7c9FUfzIZu_/view?usp=sharing",
     demo: "https://threat-zone.vercel.app/",
     preview: "Industrial Hazard Modeling • GIS Visualization",
   },
@@ -126,7 +126,7 @@ const projects = [
     repo: "https://github.com/anshu706/Construction-Project",
     video: "/videos/construction-demo.mp4",
     videoLink:
-      "https://drive.google.com/file/d/1ouUPrA-vxLA-ZxwYo0ckDbvL96AsUYta/view?usp=sharing",
+      "https://drive.google.com/file/d/1DOjrc-1UTcj2cD8JsyDuQpLbNfsp1LVQ/view?usp=sharing",
     demo: "https://construction-project-liard.vercel.app/",
     preview: "Construction Operations • Progress & Budget Analytics",
   },
@@ -390,14 +390,14 @@ const VideoPreview = ({ src, href, title, fallback }) => {
     el.muted = true; // browsers only allow autoplay when muted
 
     if (typeof IntersectionObserver === "undefined") {
-      el.play().catch(() => {});
+      el.play().catch(() => { });
       return;
     }
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          el.play().catch(() => {});
+          el.play().catch(() => { });
         } else {
           el.pause();
         }
@@ -527,9 +527,8 @@ const MatrixRain = ({ dark }) => {
     <canvas
       ref={canvasRef}
       aria-hidden="true"
-      className={`pointer-events-none fixed inset-0 z-0 h-full w-full ${
-        dark ? "opacity-40" : "opacity-25"
-      }`}
+      className={`pointer-events-none fixed inset-0 z-0 h-full w-full ${dark ? "opacity-40" : "opacity-25"
+        }`}
     />
   );
 };
@@ -560,11 +559,10 @@ const FloatingDock = ({ dark }) => (
   >
     <nav
       aria-label="Floating navigation"
-      className={`flex items-center gap-3 rounded-[28px] border p-3 shadow-2xl backdrop-blur-2xl ${
-        dark
-          ? "border-white/10 bg-zinc-950/85 shadow-black/50"
-          : "border-black/10 bg-white/85 shadow-zinc-400/30"
-      }`}
+      className={`flex items-center gap-3 rounded-[28px] border p-3 shadow-2xl backdrop-blur-2xl ${dark
+        ? "border-white/10 bg-zinc-950/85 shadow-black/50"
+        : "border-black/10 bg-white/85 shadow-zinc-400/30"
+        }`}
     >
       {dockItems.map(({ id, label, Icon, badge }) => (
         <motion.a
@@ -575,30 +573,27 @@ const FloatingDock = ({ dark }) => (
           whileHover={{ y: -6, scale: 1.08 }}
           whileTap={{ scale: 0.94 }}
           transition={{ type: "spring", stiffness: 400, damping: 20 }}
-          className={`group relative flex h-14 w-14 items-center justify-center rounded-2xl border transition-colors duration-200 ${
-            dark
-              ? "border-white/15 bg-gradient-to-b from-zinc-700/70 via-zinc-800 to-zinc-900 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_6px_14px_rgba(0,0,0,0.5)] hover:border-white/30"
-              : "border-black/10 bg-gradient-to-b from-white via-zinc-100 to-zinc-200 text-zinc-900 shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_6px_14px_rgba(0,0,0,0.12)] hover:border-black/25"
-          }`}
+          className={`group relative flex h-14 w-14 items-center justify-center rounded-2xl border transition-colors duration-200 ${dark
+            ? "border-white/15 bg-gradient-to-b from-zinc-700/70 via-zinc-800 to-zinc-900 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_6px_14px_rgba(0,0,0,0.5)] hover:border-white/30"
+            : "border-black/10 bg-gradient-to-b from-white via-zinc-100 to-zinc-200 text-zinc-900 shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_6px_14px_rgba(0,0,0,0.12)] hover:border-black/25"
+            }`}
         >
           <Icon className="h-7 w-7" strokeWidth={2} />
 
           {badge ? (
             <span
-              className={`absolute -right-1.5 -top-1.5 flex h-[22px] min-w-[22px] items-center justify-center rounded-full border-2 bg-red-500 px-1 text-[12px] font-bold leading-none text-white shadow-md ${
-                dark ? "border-zinc-950" : "border-white"
-              }`}
+              className={`absolute -right-1.5 -top-1.5 flex h-[22px] min-w-[22px] items-center justify-center rounded-full border-2 bg-red-500 px-1 text-[12px] font-bold leading-none text-white shadow-md ${dark ? "border-zinc-950" : "border-white"
+                }`}
             >
               {badge}
             </span>
           ) : null}
 
           <span
-            className={`pointer-events-none absolute -top-11 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg border px-2.5 py-1.5 text-[11px] font-medium opacity-0 shadow-xl transition-all duration-200 group-hover:-translate-y-1 group-hover:opacity-100 ${
-              dark
-                ? "border-white/10 bg-zinc-900 text-zinc-100"
-                : "border-black/10 bg-white text-zinc-800"
-            }`}
+            className={`pointer-events-none absolute -top-11 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg border px-2.5 py-1.5 text-[11px] font-medium opacity-0 shadow-xl transition-all duration-200 group-hover:-translate-y-1 group-hover:opacity-100 ${dark
+              ? "border-white/10 bg-zinc-900 text-zinc-100"
+              : "border-black/10 bg-white text-zinc-800"
+              }`}
           >
             {label}
           </span>
@@ -815,11 +810,10 @@ export default function Portfolio() {
 
       {/* HEADER */}
       <header
-        className={`sticky top-0 z-40 border-b backdrop-blur-xl ${
-          dark
-            ? "border-white/10 bg-black/75"
-            : "border-black/5 bg-white/80"
-        }`}
+        className={`sticky top-0 z-40 border-b backdrop-blur-xl ${dark
+          ? "border-white/10 bg-black/75"
+          : "border-black/5 bg-white/80"
+          }`}
       >
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
           <a
@@ -928,9 +922,8 @@ export default function Portfolio() {
               </h1>
 
               <p
-                className={`mt-6 max-w-2xl text-base leading-7 sm:text-lg ${
-                  dark ? "text-zinc-300" : "text-zinc-600"
-                }`}
+                className={`mt-6 max-w-2xl text-base leading-7 sm:text-lg ${dark ? "text-zinc-300" : "text-zinc-600"
+                  }`}
               >
                 {ROLE} • Based in {LOCATION}. I’m building my foundation in
                 cloud infrastructure, automation, and reliable software
@@ -940,11 +933,10 @@ export default function Portfolio() {
               <div className="mt-7 flex flex-wrap gap-3">
                 <a
                   href="#projects"
-                  className={`inline-flex items-center gap-2 rounded-2xl px-4 py-2.5 font-medium transition hover:-translate-y-0.5 ${
-                    dark
-                      ? "bg-white text-black hover:bg-zinc-200"
-                      : "bg-zinc-900 text-white hover:bg-zinc-700"
-                  }`}
+                  className={`inline-flex items-center gap-2 rounded-2xl px-4 py-2.5 font-medium transition hover:-translate-y-0.5 ${dark
+                    ? "bg-white text-black hover:bg-zinc-200"
+                    : "bg-zinc-900 text-white hover:bg-zinc-700"
+                    }`}
                 >
                   <ChevronRight className="h-4 w-4" />
                   Explore Projects
@@ -975,11 +967,10 @@ export default function Portfolio() {
               transition={{ duration: 0.65, delay: 0.12 }}
             >
               <div
-                className={`relative overflow-hidden rounded-3xl border p-5 shadow-2xl ${
-                  dark
-                    ? "border-white/10 bg-zinc-900/80 shadow-emerald-950/20"
-                    : "border-black/10 bg-white shadow-zinc-200"
-                }`}
+                className={`relative overflow-hidden rounded-3xl border p-5 shadow-2xl ${dark
+                  ? "border-white/10 bg-zinc-900/80 shadow-emerald-950/20"
+                  : "border-black/10 bg-white shadow-zinc-200"
+                  }`}
               >
                 <div className="mb-5 flex items-center justify-end">
                   <span className="text-xs text-zinc-500">
@@ -1043,11 +1034,10 @@ export default function Portfolio() {
         >
           <div className="mb-6 flex flex-col gap-3 sm:flex-row">
             <div
-              className={`flex flex-1 items-center gap-2 rounded-xl border px-3 ${
-                dark
-                  ? "border-white/10 bg-zinc-900"
-                  : "border-black/10 bg-white"
-              }`}
+              className={`flex flex-1 items-center gap-2 rounded-xl border px-3 ${dark
+                ? "border-white/10 bg-zinc-900"
+                : "border-black/10 bg-white"
+                }`}
             >
               <Sparkles className="h-4 w-4 text-zinc-500" />
 
@@ -1064,13 +1054,12 @@ export default function Portfolio() {
                 <button
                   key={category}
                   onClick={() => setActiveCategory(category)}
-                  className={`rounded-xl border px-3 py-2 text-sm transition duration-300 hover:-translate-y-0.5 ${
-                    activeCategory === category
-                      ? "border-emerald-400/50 bg-emerald-400/10 text-emerald-500"
-                      : dark
-                        ? "border-white/10 text-zinc-300 hover:bg-white/5"
-                        : "border-black/10 text-zinc-700 hover:bg-black/5"
-                  }`}
+                  className={`rounded-xl border px-3 py-2 text-sm transition duration-300 hover:-translate-y-0.5 ${activeCategory === category
+                    ? "border-emerald-400/50 bg-emerald-400/10 text-emerald-500"
+                    : dark
+                      ? "border-white/10 text-zinc-300 hover:bg-white/5"
+                      : "border-black/10 text-zinc-700 hover:bg-black/5"
+                    }`}
                 >
                   {category}
                 </button>
@@ -1089,11 +1078,10 @@ export default function Portfolio() {
                   duration: 0.45,
                   delay: Math.min(index * 0.04, 0.2),
                 }}
-                className={`group overflow-hidden rounded-2xl border transition duration-300 hover:-translate-y-1 hover:border-emerald-400/40 ${
-                  dark
-                    ? "border-white/10 bg-zinc-900/80"
-                    : "border-black/10 bg-white"
-                }`}
+                className={`group overflow-hidden rounded-2xl border transition duration-300 hover:-translate-y-1 hover:border-emerald-400/40 ${dark
+                  ? "border-white/10 bg-zinc-900/80"
+                  : "border-black/10 bg-white"
+                  }`}
               >
                 <div className="grid lg:grid-cols-[0.95fr_1.05fr]">
                   <div className="flex flex-col p-5 sm:p-7">
@@ -1110,9 +1098,8 @@ export default function Portfolio() {
                     </h3>
 
                     <p
-                      className={`mt-3 text-sm leading-6 ${
-                        dark ? "text-zinc-300" : "text-zinc-600"
-                      }`}
+                      className={`mt-3 text-sm leading-6 ${dark ? "text-zinc-300" : "text-zinc-600"
+                        }`}
                     >
                       {project.description}
                     </p>
@@ -1172,11 +1159,10 @@ export default function Portfolio() {
                   </div>
 
                   <div
-                    className={`min-h-[300px] border-t p-3 lg:border-l lg:border-t-0 ${
-                      dark
-                        ? "border-white/10 bg-black/30"
-                        : "border-black/10 bg-zinc-100"
-                    }`}
+                    className={`min-h-[300px] border-t p-3 lg:border-l lg:border-t-0 ${dark
+                      ? "border-white/10 bg-black/30"
+                      : "border-black/10 bg-zinc-100"
+                      }`}
                   >
                     <div className="flex h-full min-h-[300px] flex-col overflow-hidden rounded-xl border border-white/10 bg-[#101114]">
                       {project.video ? (
@@ -1265,9 +1251,8 @@ export default function Portfolio() {
           eyebrow="My engineering toolbox"
         >
           <p
-            className={`mb-7 max-w-4xl text-sm leading-7 ${
-              dark ? "text-zinc-300" : "text-zinc-600"
-            }`}
+            className={`mb-7 max-w-4xl text-sm leading-7 ${dark ? "text-zinc-300" : "text-zinc-600"
+              }`}
           >
             A growing toolkit focused on programming fundamentals, Linux, cloud
             infrastructure, and software delivery. Update these cards as your
@@ -1342,20 +1327,17 @@ export default function Portfolio() {
         >
           <div className="relative overflow-hidden">
             <div
-              className={`pointer-events-none absolute inset-y-0 left-0 z-10 w-10 bg-gradient-to-r ${
-                dark ? "from-black" : "from-zinc-50"
-              } to-transparent`}
+              className={`pointer-events-none absolute inset-y-0 left-0 z-10 w-10 bg-gradient-to-r ${dark ? "from-black" : "from-zinc-50"
+                } to-transparent`}
             />
             <div
-              className={`pointer-events-none absolute inset-y-0 right-0 z-10 w-10 bg-gradient-to-l ${
-                dark ? "from-black" : "from-zinc-50"
-              } to-transparent`}
+              className={`pointer-events-none absolute inset-y-0 right-0 z-10 w-10 bg-gradient-to-l ${dark ? "from-black" : "from-zinc-50"
+                } to-transparent`}
             />
 
             <div
-              className={`certificate-track gap-4 py-3 ${
-                carouselPaused || selectedCert ? "paused" : ""
-              }`}
+              className={`certificate-track gap-4 py-3 ${carouselPaused || selectedCert ? "paused" : ""
+                }`}
               onMouseEnter={() => setCarouselPaused(true)}
               onMouseLeave={() => setCarouselPaused(false)}
             >
@@ -1378,11 +1360,10 @@ export default function Portfolio() {
                         setSelectedCert(certificate);
                       }
                     }}
-                    className={`group w-[280px] shrink-0 cursor-pointer overflow-hidden rounded-2xl border transition duration-300 hover:border-emerald-400/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 ${
-                      dark
-                        ? "border-white/10 bg-zinc-900"
-                        : "border-black/10 bg-white"
-                    }`}
+                    className={`group w-[280px] shrink-0 cursor-pointer overflow-hidden rounded-2xl border transition duration-300 hover:border-emerald-400/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 ${dark
+                      ? "border-white/10 bg-zinc-900"
+                      : "border-black/10 bg-white"
+                      }`}
                   >
                     {certificate.image ? (
                       <div className="relative">

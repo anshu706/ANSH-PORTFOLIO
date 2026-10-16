@@ -293,60 +293,6 @@ function RevealScreen() {
   );
 }
 
-function playAtmosphericSwell() {
-  try {
-    const AudioCtx = window.AudioContext || window.webkitAudioContext;
-    if (!AudioCtx) return;
-    const ctx = new AudioCtx();
-    const now = ctx.currentTime;
-
-    const master = ctx.createGain();
-    master.gain.setValueAtTime(0.0001, now);
-    master.gain.exponentialRampToValueAtTime(0.18, now + 1.2);
-    master.gain.exponentialRampToValueAtTime(0.0001, now + 4.8);
-    master.connect(ctx.destination);
-
-    // Deep sub-bass drone
-    const sub = ctx.createOscillator();
-    sub.type = "sine";
-    sub.frequency.setValueAtTime(55, now);
-    sub.frequency.exponentialRampToValueAtTime(45, now + 4.8);
-
-    // Warm cinematic harmonic
-    const osc1 = ctx.createOscillator();
-    osc1.type = "triangle";
-    osc1.frequency.setValueAtTime(220, now);
-    osc1.frequency.exponentialRampToValueAtTime(277.18, now + 2.5);
-
-    const osc2 = ctx.createOscillator();
-    osc2.type = "sine";
-    osc2.frequency.setValueAtTime(440, now);
-    osc2.frequency.exponentialRampToValueAtTime(659.25, now + 2.5);
-
-    // Lowpass filter for smooth cinematic warmth
-    const filter = ctx.createBiquadFilter();
-    filter.type = "lowpass";
-    filter.frequency.setValueAtTime(280, now);
-    filter.frequency.exponentialRampToValueAtTime(1400, now + 2);
-    filter.frequency.exponentialRampToValueAtTime(200, now + 4.8);
-
-    sub.connect(master);
-    osc1.connect(filter);
-    osc2.connect(filter);
-    filter.connect(master);
-
-    sub.start(now);
-    osc1.start(now);
-    osc2.start(now);
-
-    sub.stop(now + 4.9);
-    osc1.stop(now + 4.9);
-    osc2.stop(now + 4.9);
-  } catch (err) {
-    /* Silent graceful fallback if audio is disallowed or blocked by device */
-  }
-}
-
 /* ═══════════════════════════ MAIN COMPONENT ══════════════════════════ */
 
 export default function IntroScreen({ onDone }) {
@@ -356,7 +302,6 @@ export default function IntroScreen({ onDone }) {
   phaseRef.current = phase;
 
   const play = useCallback(() => {
-    playAtmosphericSwell();
     setPhase("playing");
     timer.current = setTimeout(() => setPhase("fading"), INTRO_MS);
   }, []);
