@@ -36,6 +36,41 @@ const LINKEDIN = "https://www.linkedin.com/in/ansh-upadhayay-011b77310/";
 
 const projects = [
   {
+    title: "Phyzo",
+    year: "2026",
+    level: "Advanced",
+    category: "Web",
+    description:
+      "An interactive, real-time 3D physics laboratory & simulation platform with live mathematical formula derivation, symplectic Runge-Kutta numerical integration, and zero numerical drift.",
+    features: [
+      "Simulates rigid body collisions, harmonic oscillators, ballistics, and inclined planes powered by the deterministic Rapier 3D physics engine.",
+      "Implements Snell-Descartes ray tracing, Cauchy chromatic dispersion (400–700nm prism rainbows), and lossless Total Internal Reflection (TIR).",
+      "Integrates continuous Lorentz force solvers (F = q(E + v × B)) with cyclotron gyration radius telemetry and 3D vector field lines.",
+      "Visualizes hydrogen atom Bohr orbitals (ψ_nlm probability clouds), 1D infinite quantum wells, and Maxwell-Boltzmann gas thermodynamics.",
+      "Features dynamic per-frame KaTeX formula derivation with live active numerical variable substitution as objects move and collide.",
+      "Maintains a live real-time Energy Conservation HUD (KE + PE) with zero numerical drift via symplectic Runge-Kutta 4 numerical integration.",
+    ],
+    stack: [
+      "React",
+      "TypeScript",
+      "Three.js",
+      "React Three Fiber",
+      "Rapier Physics",
+      "KaTeX",
+      "Zustand",
+      "Tailwind CSS",
+      "Vite",
+    ],
+    repo: "https://github.com/anshu706/Phyzo",
+    video: "/videos/phyzo.mp4",
+    videoLink:
+      "https://drive.google.com/file/d/1LDrcv7RGOT8Kw7pX2ZBEkocP22QXohRs/view?usp=sharing",
+    demo: "https://phyzo-ashen.vercel.app/",
+    image: "/projects/phyzo.png",
+    preview:
+      "Interactive 3D Physics Laboratory • Real-Time Math Derivation & Optics",
+  },
+  {
     title: "Dyslexia Assistant",
     year: "2026",
     level: "Advanced",
