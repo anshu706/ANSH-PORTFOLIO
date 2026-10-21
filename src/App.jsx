@@ -29,7 +29,7 @@ const ROLE = "Cloud • Automation • CI/CD • DevOps";
 const LOCATION = "India";
 
 const RESUME_LINK =
-  "https://drive.google.com/file/d/1JYFwts9nLx7Zv3RFBDQ6i1COSISgE-z9/view?usp=sharing";
+  "https://drive.google.com/file/d/1kDBNk8_VAd7yFpYx0tpQi0jjs0c7beec/view?usp=sharing";
 const EMAIL = "anshupadhayay212@gmail.com";
 const GITHUB = "https://github.com/anshu706";
 const LINKEDIN = "https://www.linkedin.com/in/ansh-upadhayay-011b77310/";
