@@ -1,62 +1,199 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 
 /* ═══════════════════════════════════════════════════════════════════════════════
-   ANSH — 3D CINEMATIC LIQUID SMOKE INTRO SCREEN
-   Exact Alexandre Rochet style:
-   - Deep obsidian black with smooth, silky, slow-swirling liquid waves
-   - 3D normal-mapped specular lighting (no grainy / high-frequency noise)
-   - "ANSH" 4 hero letters floating with volumetric cylindrical 3D extrusions
+   ANSH — 3D CINEMATIC INTRO SCREEN (Alexandre Rochet Aesthetic)
+   - Background: Deep obsidian black with silky, visible smoke/silk swirls
+   - Letters: "ANSH" only, distributed in a 3D galaxy of architectural sculptures
+   - Cylindrical extruded perspective trails (matching 'D' & 'O' in reference)
+   - Center hero letter with photographic camera depth-of-field lens blur (matching 'X')
    ═══════════════════════════════════════════════════════════════════════════════ */
 
-// The 4 hero letters: A · N · S · H arranged in dynamic 3D space
+// 15 letter positions mirroring Alexandre Rochet's composition, using "A · N · S · H"
 const LETTERS = [
-  {
-    char: "A",
-    x: -0.42,
-    y: -0.06,
-    z: 0.38,
-    size: 135,
-    trailLength: 38,
-    trailAlpha: 0.38,
-    blur: 0.8,
-    weight: "700",
-    rotX: -0.08,
-  },
+  // ── Central Hero (matching the large blurred 'X' in reference) ──
   {
     char: "N",
-    x: -0.14,
-    y: 0.16,
-    z: 0.28,
-    size: 165,
-    trailLength: 46,
-    trailAlpha: 0.44,
-    blur: 2.2, // Central hero glow (like the X in Alexandre Rochet)
-    weight: "800",
-    rotX: 0.05,
+    x: -0.02,
+    y: 0.02,
+    z: 0.25,
+    size: 155,
+    trailLength: 32,
+    trailAlpha: 0.38,
+    blur: 3.5,
+    weight: "600",
+    heroCenter: true,
+  },
+
+  // ── Foreground Hero Sculptures with deep 3D cylindrical extrusions ──
+  // Top-Right: matching the extruded hollow cylinder 'D' in reference
+  {
+    char: "S",
+    x: 0.40,
+    y: -0.28,
+    z: 0.36,
+    size: 125,
+    trailLength: 52,
+    trailAlpha: 0.46,
+    blur: 0.6,
+    weight: "600",
+    cylinder: true,
+  },
+  // Left-Mid: matching the standing 3D 'L' in reference
+  {
+    char: "A",
+    x: -0.32,
+    y: 0.06,
+    z: 0.42,
+    size: 115,
+    trailLength: 38,
+    trailAlpha: 0.40,
+    blur: 0.5,
+    weight: "600",
+  },
+  // Bottom-Left: matching the hollow cylinder 'O' in reference
+  {
+    char: "H",
+    x: -0.26,
+    y: 0.44,
+    z: 0.38,
+    size: 105,
+    trailLength: 50,
+    trailAlpha: 0.45,
+    blur: 0.6,
+    weight: "600",
+    cylinder: true,
+  },
+
+  // ── Midground Sculptures ──
+  // Top Center-Left (matching the high 'A' in reference)
+  {
+    char: "A",
+    x: 0.03,
+    y: -0.46,
+    z: 0.65,
+    size: 75,
+    trailLength: 26,
+    trailAlpha: 0.32,
+    blur: 0.3,
+    weight: "500",
+  },
+  // Far Left (matching 'A' & 'R' on far-left in reference)
+  {
+    char: "N",
+    x: -0.56,
+    y: -0.12,
+    z: 0.72,
+    size: 72,
+    trailLength: 24,
+    trailAlpha: 0.30,
+    blur: 0.3,
+    weight: "500",
   },
   {
     char: "S",
-    x: 0.16,
-    y: -0.14,
-    z: 0.34,
-    size: 155,
-    trailLength: 42,
-    trailAlpha: 0.40,
-    blur: 1.0,
-    weight: "800",
-    rotX: -0.06,
+    x: -0.58,
+    y: 0.25,
+    z: 0.76,
+    size: 70,
+    trailLength: 26,
+    trailAlpha: 0.30,
+    blur: 0.3,
+    weight: "500",
+  },
+  // Mid-Right cluster (matching 'N', 'R', 'T' in reference)
+  {
+    char: "A",
+    x: 0.34,
+    y: -0.04,
+    z: 0.68,
+    size: 70,
+    trailLength: 24,
+    trailAlpha: 0.28,
+    blur: 0.2,
+    weight: "500",
   },
   {
     char: "H",
-    x: 0.46,
+    x: 0.68,
     y: 0.10,
-    z: 0.40,
-    size: 130,
-    trailLength: 36,
-    trailAlpha: 0.36,
-    blur: 0.6,
-    weight: "700",
-    rotX: 0.08,
+    z: 0.52,
+    size: 85,
+    trailLength: 32,
+    trailAlpha: 0.34,
+    blur: 0.4,
+    weight: "600",
+  },
+  {
+    char: "N",
+    x: 0.82,
+    y: 0.28,
+    z: 0.62,
+    size: 78,
+    trailLength: 28,
+    trailAlpha: 0.32,
+    blur: 0.3,
+    weight: "600",
+  },
+  // Bottom Center-Right (matching 'C' & 'H' in reference)
+  {
+    char: "S",
+    x: 0.00,
+    y: 0.48,
+    z: 0.66,
+    size: 68,
+    trailLength: 22,
+    trailAlpha: 0.28,
+    blur: 0.2,
+    weight: "500",
+  },
+  {
+    char: "A",
+    x: 0.36,
+    y: 0.46,
+    z: 0.56,
+    size: 84,
+    trailLength: 30,
+    trailAlpha: 0.32,
+    blur: 0.3,
+    weight: "500",
+  },
+
+  // ── Deep Background Mist Letters (atmospheric depth) ──
+  // Upper-left high (matching 'E' in reference)
+  {
+    char: "H",
+    x: -0.34,
+    y: -0.32,
+    z: 0.95,
+    size: 52,
+    trailLength: 16,
+    trailAlpha: 0.20,
+    blur: 0.8,
+    weight: "500",
+  },
+  // Far upper-right (matching 'E' on top-right in reference)
+  {
+    char: "N",
+    x: 0.78,
+    y: -0.30,
+    z: 1.10,
+    size: 48,
+    trailLength: 14,
+    trailAlpha: 0.18,
+    blur: 1.0,
+    weight: "500",
+  },
+  // Mid-right small (matching 'E' in reference)
+  {
+    char: "S",
+    x: 0.44,
+    y: 0.18,
+    z: 0.90,
+    size: 50,
+    trailLength: 15,
+    trailAlpha: 0.20,
+    blur: 0.7,
+    weight: "500",
   },
 ];
 
@@ -70,8 +207,8 @@ const VERT_SRC = `
   }
 `;
 
-// Pure-black, silky liquid smoke with normal-based 3D specular lighting
-// Matches Image 2: large, smooth, undulating fluid folds without speckles or blue tint
+// Fluid smoke / silky marbling shader matching Image 2
+// Rich, visible ribbons of charcoal smoke & silvery wave crests swirling against deep obsidian
 const FRAG_SRC = `
   precision highp float;
   varying vec2 vUv;
@@ -105,75 +242,93 @@ const FRAG_SRC = `
     return 130.0 * dot(m, g);
   }
 
-  // Smooth, low-frequency wave field (pure silky smoke/liquid, zero grain)
-  float fluidHeight(vec2 p, float t) {
-    vec2 q = vec2(
-      snoise(p * 0.45 + vec2(0.0, t * 0.12)),
-      snoise(p * 0.45 + vec2(4.3, 2.1 - t * 0.10))
+  // Smooth, low-frequency 3-octave FBM for broad silky smoke folds (no grain)
+  float smokeFbm(vec2 p) {
+    float v = 0.0;
+    float a = 0.50;
+    mat2 rot = mat2(0.877, 0.479, -0.479, 0.877);
+    for (int i = 0; i < 4; i++) {
+      v += a * snoise(p);
+      p = rot * p * 1.82 + vec2(1.4, 0.9);
+      a *= 0.48;
+    }
+    return v;
+  }
+
+  // Two-stage domain warping for organic liquid marbling
+  float smokeField(vec2 p, float t, out vec2 q, out vec2 r) {
+    q = vec2(
+      smokeFbm(p * 0.65 + vec2(0.0, t * 0.14)),
+      smokeFbm(p * 0.65 + vec2(5.2, 1.3 - t * 0.12))
     );
 
-    vec2 r = vec2(
-      snoise(p * 0.55 + 1.8 * q + vec2(1.7, 9.2) + vec2( t * 0.08, -t * 0.06)),
-      snoise(p * 0.55 + 1.8 * q + vec2(8.3, 2.8) + vec2(-t * 0.06,  t * 0.08))
+    r = vec2(
+      smokeFbm(p * 0.75 + 2.0 * q + vec2(1.7, 9.2) + vec2( t * 0.08, -t * 0.06)),
+      smokeFbm(p * 0.75 + 2.0 * q + vec2(8.3, 2.8) + vec2(-t * 0.06,  t * 0.08))
     );
 
-    float f = snoise(p * 0.50 + 2.0 * r);
-    f += 0.30 * snoise(p * 0.90 + 1.2 * q - vec2(t * 0.05, t * 0.07));
-    return f;
+    return smokeFbm(p * 0.70 + 2.2 * r);
   }
 
   void main() {
     vec2 uv = gl_FragCoord.xy / uResolution.xy;
-    vec2 p = (gl_FragCoord.xy * 2.0 - uResolution.xy) / min(uResolution.x, uResolution.y);
+    vec2 p  = (gl_FragCoord.xy * 2.0 - uResolution.xy) / min(uResolution.x, uResolution.y);
 
-    // Mouse influence - smooth displacement wave
+    // Mouse influence
     vec2 m = (uMouse * 2.0 - 1.0);
     m.y = -m.y;
     float mDist = length(p - m * 0.9);
     vec2 mOffset = normalize(p - m * 0.9 + 0.0001) * exp(-mDist * 2.2) * 0.12;
 
-    float t = uTime * 0.16;
-    vec2 pos = p * 0.85 + mOffset;
+    float t = uTime * 0.14;
+    vec2 pos = p * 0.75 + mOffset;
 
-    // Normal calculation via finite differences for genuine 3D liquid lighting
-    float eps = 0.02;
-    float hC = fluidHeight(pos, t);
-    float hR = fluidHeight(pos + vec2(eps, 0.0), t);
-    float hU = fluidHeight(pos + vec2(0.0, eps), t);
+    vec2 q, r;
+    float f = smokeField(pos, t, q, r);
+    float n = clamp(f * 0.5 + 0.5, 0.0, 1.0);
 
-    vec3 normal = normalize(vec3((hC - hR) / eps, (hC - hU) / eps, 0.32));
+    // Compute surface normal for specular lighting
+    float eps = 0.025;
+    vec2 dQ, dR;
+    float fR = smokeField(pos + vec2(eps, 0.0), t, dQ, dR);
+    float fU = smokeField(pos + vec2(0.0, eps), t, dQ, dR);
+    vec3 normal = normalize(vec3((f - fR) / eps, (f - fU) / eps, 0.42));
 
-    // Directional lighting matching Alexandre Rochet
+    // Directional lighting
     vec3 light1 = normalize(vec3(-0.4, 0.6, 0.75));
     vec3 light2 = normalize(vec3(0.5, -0.3, 0.60));
     vec3 viewDir = vec3(0.0, 0.0, 1.0);
 
-    // Diffuse
     float diff1 = max(dot(normal, light1), 0.0);
     float diff2 = max(dot(normal, light2), 0.0);
 
-    // Specular (glossy wet fluid sheen)
     vec3 half1 = normalize(light1 + viewDir);
     float spec1 = pow(max(dot(normal, half1), 0.0), 16.0);
 
     vec3 half2 = normalize(light2 + viewDir);
     float spec2 = pow(max(dot(normal, half2), 0.0), 28.0);
 
-    // Monochromatic deep black, silky charcoal, and soft silvery crests
-    vec3 baseBlack  = vec3(0.012, 0.012, 0.015);
-    vec3 smokeMid   = vec3(0.145, 0.150, 0.160);
-    vec3 liquidGlint = vec3(0.58, 0.60, 0.64);
+    // ── Color Grading exactly matching Image 2 ──
+    // Deep obsidian black base
+    vec3 baseBlack = vec3(0.022, 0.024, 0.028);
 
-    float tone = clamp(diff1 * 0.65 + diff2 * 0.35 + (hC * 0.15), 0.0, 1.0);
-    float darkTone = pow(tone, 2.4);
+    // Smoky grey marbling (visible ribbons!)
+    vec3 smokeGray = vec3(0.18, 0.19, 0.22);
+    float smokeRibbons = smoothstep(0.20, 0.72, n);
+    vec3 col = mix(baseBlack, smokeGray, smokeRibbons * 0.88);
 
-    vec3 col = mix(baseBlack, smokeMid, darkTone);
-    col += liquidGlint * (spec1 * 0.38 + spec2 * 0.22);
+    // Silky bright swirls & highlights
+    vec3 silkHighlight = vec3(0.38, 0.40, 0.45);
+    float silkCurl = smoothstep(0.48, 0.86, n);
+    col = mix(col, silkHighlight, silkCurl * 0.65);
 
-    // Smooth soft vignette
-    float vig = length((uv - 0.5) * 1.4);
-    col *= clamp(1.0 - vig * 0.65, 0.0, 1.0);
-    col *= clamp(1.3 - vig * vig * 0.7, 0.0, 1.0);
+    // Liquid specular glints along the wave ridges
+    vec3 glint = vec3(0.58, 0.60, 0.66);
+    col += glint * (spec1 * 0.42 + spec2 * 0.25);
+
+    // Subtle edge vignette
+    float vig = length((uv - 0.5) * 1.35);
+    col *= clamp(1.25 - vig * 0.55, 0.0, 1.0);
 
     gl_FragColor = vec4(col, 1.0);
   }
@@ -355,17 +510,17 @@ export default function IntroScreen({ onDone }) {
       const cy = H * 0.5;
       const fov = Math.min(W, H) * 0.95;
 
-      // Sort back-to-front
+      // Sort back-to-front for accurate painter's algorithm
       const instances = LETTERS.map((def, i) => {
-        const floatX = Math.sin(t * 0.65 + i * 1.37) * 0.020;
-        const floatY = Math.cos(t * 0.55 + i * 1.13) * 0.025;
-        const floatRot = Math.sin(t * 0.38 + i * 0.91) * 0.045;
+        const floatX = Math.sin(t * 0.65 + i * 1.37) * 0.018;
+        const floatY = Math.cos(t * 0.55 + i * 1.13) * 0.022;
+        const floatRot = Math.sin(t * 0.38 + i * 0.91) * 0.04;
         return {
           ...def,
           wx: def.x + floatX,
           wy: def.y + floatY,
           wz: def.z + cam.z,
-          rot: (def.rotX || 0) + floatRot,
+          rot: floatRot,
         };
       })
         .filter((item) => item.wz > 0.05)
@@ -384,37 +539,39 @@ export default function IntroScreen({ onDone }) {
         const dLen = Math.hypot(dx, dy) || 1;
         const distNorm = dLen / Math.max(W, H);
 
-        // Blend perspective center vector with a natural downward-right light angle
-        const projX = (dx / dLen) * 0.55 + 0.35;
-        const projY = (dy / dLen) * 0.55 + 0.60;
+        // Cylindrical extrusion vector pointing downward-right into space (matching 'D' & 'O' in reference)
+        const projX = (dx / dLen) * 0.45 + 0.45;
+        const projY = (dy / dLen) * 0.45 + 0.65;
         const projLen = Math.hypot(projX, projY) || 1;
 
-        const steps = Math.min(42, Math.max(12, Math.floor(item.trailLength * scale * 1.3)));
-        const trailDist = item.trailLength * scale * 2.3 * (1.0 + distNorm * 0.85);
+        const steps = Math.min(45, Math.max(12, Math.floor(item.trailLength * scale * 1.35)));
+        const trailDist = item.trailLength * scale * 2.3 * (1.0 + distNorm * 0.8);
 
         ctx.save();
-        ctx.font = `${item.weight || "700"} ${fSize}px 'Syne', 'Inter', -apple-system, sans-serif`;
+        ctx.font = `${item.weight || "500"} ${fSize}px 'Syne', 'Inter', -apple-system, sans-serif`;
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
 
-        // ── Volumetric cylindrical extrusion shadow trail (back → front) ──
+        // ── Volumetric cylindrical 3D extrusion trail (back → front) ──
         for (let s = steps; s >= 1; s--) {
           const prog = s / steps;
           const offX = (projX / projLen) * (trailDist * prog);
           const offY = (projY / projLen) * (trailDist * prog);
-          const alpha = (1.0 - prog) * (item.trailAlpha || 0.35) * (1.1 - item.wz * 0.4);
 
-          // Subtle smoky body fill
-          ctx.fillStyle = `rgba(215, 225, 238, ${Math.max(0, Math.min(0.60, alpha))})`;
+          // Alpha falls off towards the end of the trail
+          const alpha = (1.0 - prog) * (item.trailAlpha || 0.35) * (1.1 - item.wz * 0.4);
 
           ctx.save();
           ctx.translate(sx + offX, sy + offY);
           ctx.rotate(item.rot * (1 - prog * 0.35));
+
+          // Soft volumetric smoky body fill
+          ctx.fillStyle = `rgba(180, 195, 218, ${Math.max(0, Math.min(0.55, alpha * 0.85))})`;
           ctx.fillText(item.char, 0, 0);
 
-          // Subtle stroke to give tubular structure like the "D" and "O" in reference
-          ctx.strokeStyle = `rgba(255, 255, 255, ${Math.max(0, Math.min(0.25, alpha * 0.75))})`;
-          ctx.lineWidth = Math.max(0.4, 0.8 * scale);
+          // Clean stroke contour on extrusion layers to create solid cylindrical walls
+          ctx.strokeStyle = `rgba(230, 240, 255, ${Math.max(0, Math.min(0.35, alpha * 0.70))})`;
+          ctx.lineWidth = Math.max(0.6, 1.1 * scale);
           ctx.strokeText(item.char, 0, 0);
 
           ctx.restore();
@@ -425,23 +582,31 @@ export default function IntroScreen({ onDone }) {
         ctx.translate(sx, sy);
         ctx.rotate(item.rot);
 
-        // Glow for central hero letters
-        if (item.blur > 0) {
-          ctx.shadowColor = "rgba(255, 255, 255, 0.50)";
-          ctx.shadowBlur = item.blur * 14 * scale;
+        // Photographic depth-of-field blur on center hero letter (matching 'X' in reference)
+        if (item.heroCenter) {
+          ctx.shadowColor = "rgba(255, 255, 255, 0.75)";
+          ctx.shadowBlur = 18 * scale;
+
+          // Double pass for optical camera glow
+          ctx.fillStyle = "rgba(255, 255, 255, 0.65)";
+          ctx.fillText(item.char, -1.5, -1.0);
+          ctx.fillText(item.char, 1.5, 1.0);
+        } else if (item.blur && item.blur > 0) {
+          ctx.shadowColor = "rgba(255, 255, 255, 0.45)";
+          ctx.shadowBlur = item.blur * 10 * scale;
         }
 
         // Metallic silver-white gradient face
         const grad = ctx.createLinearGradient(0, -fSize * 0.5, 0, fSize * 0.5);
         grad.addColorStop(0.0, "rgba(255, 255, 255, 1.0)");
-        grad.addColorStop(0.35, "rgba(240, 245, 252, 0.95)");
-        grad.addColorStop(1.0, "rgba(185, 195, 210, 0.75)");
+        grad.addColorStop(0.4, "rgba(238, 242, 250, 0.95)");
+        grad.addColorStop(1.0, "rgba(185, 195, 210, 0.80)");
         ctx.fillStyle = grad;
         ctx.fillText(item.char, 0, 0);
 
-        // Crisp white rim outline
-        ctx.strokeStyle = "rgba(255, 255, 255, 0.45)";
-        ctx.lineWidth = Math.max(0.6, 1.3 * scale);
+        // Luminous crisp white outline on the front rim
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.90)";
+        ctx.lineWidth = Math.max(0.8, 1.6 * scale);
         ctx.strokeText(item.char, 0, 0);
 
         ctx.restore();
@@ -464,7 +629,7 @@ export default function IntroScreen({ onDone }) {
         position: "fixed",
         inset: 0,
         zIndex: 999999,
-        background: "#050507",
+        background: "#030305",
         cursor: "pointer",
         overflow: "hidden",
         userSelect: "none",
@@ -479,7 +644,7 @@ export default function IntroScreen({ onDone }) {
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       <link
-        href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@300;400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=Inter:wght@300;400;500;600&display=swap"
         rel="stylesheet"
       />
 
