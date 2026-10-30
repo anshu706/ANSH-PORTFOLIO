@@ -1,14 +1,14 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 
 /* ═══════════════════════════════════════════════════════════════════════════════
-   ANSH — 3D CINEMATIC INTRO SCREEN (Alexandre Rochet Aesthetic)
-   - Background: Deep obsidian black with silky, visible smoke/silk swirls
+   ANSH — 3D CINEMATIC LIQUID SMOKE INTRO SCREEN
+   - Background: Deep obsidian black with silky liquid smoke/silk wave swirls
    - Letters: "ANSH" only, distributed in a 3D galaxy of architectural sculptures
-   - Cylindrical extruded perspective trails (matching 'D' & 'O' in reference)
-   - Center hero letter with photographic camera depth-of-field lens blur (matching 'X')
+   - Cylindrical extruded perspective trails
+   - Center hero letter with photographic camera depth-of-field lens blur
    ═══════════════════════════════════════════════════════════════════════════════ */
 
-// 15 letter positions mirroring Alexandre Rochet's composition, using "A · N · S · H"
+// 15 letter positions forming the 3D galaxy composition, using "A · N · S · H"
 const LETTERS = [
   // ── Central Hero (matching the large blurred 'X' in reference) ──
   {
